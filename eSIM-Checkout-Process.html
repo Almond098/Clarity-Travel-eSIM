@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout - Clarity: Travel e-SIM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#0066FF',
+secondary: '#FF6B00'
+},
+borderRadius: {
+'none': '0px',
+'sm': '4px',
+DEFAULT: '8px',
+'md': '12px',
+'lg': '16px',
+'xl': '20px',
+'2xl': '24px',
+'3xl': '32px',
+'full': '9999px',
+'button': '8px'
+},
+fontFamily: {
+'sans': ['Inter', 'sans-serif'],
+}
+}
+}
+}
+</script>
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+font-family: 'Inter', sans-serif;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+.custom-radio {
+position: relative;
+display: inline-block;
+width: 20px;
+height: 20px;
+border: 2px solid #d1d5db;
+border-radius: 50%;
+transition: all 0.2s;
+}
+.custom-radio.checked {
+border-color: #0066FF;
+}
+.custom-radio.checked::after {
+content: '';
+position: absolute;
+left: 4px;
+top: 4px;
+width: 8px;
+height: 8px;
+border-radius: 50%;
+background-color: #0066FF;
+}
+</style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+<!-- Header -->
+<header class="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
+<div class="container mx-auto px-4 py-3 flex items-center justify-between">
+<div class="flex items-center">
+<a href="#" class="mr-10">
+<img src="https://static.readdy.ai/image/70685381c99ca4e49dd877c3c9c9275a/8c0e71f0e9551716a2d424fb272e3c0f.jpeg" alt="Clarity eSIM" class="h-16 mix-blend-multiply">
+</a>
+<nav class="hidden md:flex space-x-8">
+<a href="#" class="font-medium text-gray-600 hover:text-primary transition">Home</a>
+<a href="https://readdy.ai/home/cb427912-1443-4d48-ab20-fc0dde936c49/63ab3200-098a-4f6b-9bbe-d9a5afe0266a" data-readdy="true" class="font-medium text-gray-600 hover:text-primary transition">eSIM Plans</a>
+<a href="#" class="font-medium text-gray-600 hover:text-primary transition">Coverage</a>
+<a href="#" class="font-medium text-gray-600 hover:text-primary transition">How It Works</a>
+<a href="#" class="font-medium text-gray-600 hover:text-primary transition">Support</a>
+</nav>
+</div>
+<div class="flex items-center space-x-6">
+<div id="cartIcon" class="w-10 h-10 flex items-center justify-center text-gray-600 hover:text-primary cursor-pointer relative">
+<i class="ri-shopping-cart-2-line text-xl"></i>
+<span class="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">1</span>
+<div id="cartDropdown" class="hidden absolute top-full right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
+<div class="p-4">
+<div class="flex items-center justify-between pb-4 border-b border-gray-100">
+<h3 class="font-semibold">Shopping Cart</h3>
+<span class="text-sm text-gray-500">1 item</span>
+</div>
+<div class="py-4 max-h-64 overflow-y-auto">
+<div class="flex items-center gap-3">
+<div class="w-16 h-16 flex-shrink-0 rounded-lg overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=Europe%2520travel%2520map%2520with%2520iconic%2520landmarks%2520like%2520Eiffel%2520Tower%2520and%2520Colosseum%252C%2520digital%2520illustration%2520with%2520clean%2520lines%2520and%2520minimalist%2520style%252C%2520perfect%2520for%2520travel%2520website%252C%2520blue%2520and%2520white%2520color%2520scheme%252C%2520professional%2520quality&width=200&height=200&seq=2001&orientation=squarish" alt="Europe Travel eSIM" class="w-full h-full object-cover object-top">
+</div>
+<div class="flex-grow">
+<h4 class="font-medium text-sm">Europe Travel eSIM</h4>
+<p class="text-xs text-gray-500">10GB Data - 30 Days</p>
+<div class="flex items-center justify-between mt-1">
+<span class="text-primary font-medium">$24.99</span>
+<div class="flex items-center gap-2">
+<button class="w-6 h-6 flex items-center justify-center text-gray-500 hover:text-primary bg-gray-50 rounded">-</button>
+<span class="text-sm">1</span>
+<button class="w-6 h-6 flex items-center justify-center text-gray-500 hover:text-primary bg-gray-50 rounded">+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="pt-4 border-t border-gray-100">
+<div class="flex items-center justify-between mb-4">
+<span class="font-medium">Total:</span>
+<span class="font-semibold text-primary">$24.99</span>
+</div>
+<div class="flex flex-col gap-2">
+<a href="https://readdy.ai/home/cb427912-1443-4d48-ab20-fc0dde936c49/74cd2793-b555-4f6f-a30d-84d5f704e791" data-readdy="true" class="bg-gray-100 text-gray-700 py-2 text-center font-medium rounded-button whitespace-nowrap hover:bg-gray-200 transition">View Cart</a>
+<a href="#" class="bg-primary text-white py-2 text-center font-medium rounded-button whitespace-nowrap hover:bg-primary/90 transition">Checkout</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="w-10 h-10 flex items-center justify-center text-gray-600 hover:text-primary cursor-pointer">
+<i class="ri-user-3-line text-xl"></i>
+</div>
+<button class="md:hidden w-10 h-10 flex items-center justify-center">
+<i class="ri-menu-line text-xl"></i>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="pt-24 pb-16">
+<div class="container mx-auto px-4">
+<!-- Checkout Header -->
+<div class="flex items-center mb-8">
+<a href="https://readdy.ai/home/cb427912-1443-4d48-ab20-fc0dde936c49/24a98dbc-1119-4e00-a8a9-2f929b42c040" data-readdy="true" class="w-10 h-10 flex items-center justify-center text-gray-600 hover:text-primary bg-white rounded-full shadow-sm">
+<i class="ri-arrow-left-s-line text-xl"></i>
+</a>
+<h1 class="text-2xl font-bold ml-4">Checkout</h1>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Left Column - Form Sections -->
+<div class="lg:col-span-2 space-y-6">
+<!-- Product Summary -->
+<div class="bg-white rounded-lg shadow-sm p-6">
+<h2 class="text-lg font-semibold mb-4">Selected Plan</h2>
+<div class="flex flex-col md:flex-row">
+<div class="flex-shrink-0 w-full md:w-24 h-24 bg-gray-100 rounded-lg mb-4 md:mb-0 md:mr-4 overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=Europe%2520travel%2520map%2520with%2520iconic%2520landmarks%2520like%2520Eiffel%2520Tower%2520and%2520Colosseum%252C%2520digital%2520illustration%2520with%2520clean%2520lines%2520and%2520minimalist%2520style%252C%2520perfect%2520for%2520travel%2520website%252C%2520blue%2520and%2520white%2520color%2520scheme%252C%2520professional%2520quality&width=200&height=200&seq=2001&orientation=squarish" alt="Europe Travel eSIM" class="w-full h-full object-cover object-top">
+</div>
+<div class="flex-grow">
+<h3 class="font-semibold text-lg">Europe Travel eSIM</h3>
+<p class="text-gray-500 text-sm mb-2">Valid in 30+ European countries</p>
+<div class="flex flex-wrap gap-4 mb-3">
+<div class="flex items-center text-gray-600 text-sm">
+<i class="ri-wifi-line mr-2 text-primary"></i>
+<span>10GB Data</span>
+</div>
+<div class="flex items-center text-gray-600 text-sm">
+<i class="ri-time-line mr-2 text-primary"></i>
+<span>30 Days Validity</span>
+</div>
+</div>
+<div class="flex items-center">
+<span class="text-xl font-bold text-primary">$24.99</span>
+<span class="text-gray-500 text-sm line-through ml-2">$29.99</span>
+<span class="ml-2 bg-green-50 text-green-700 px-2 py-0.5 rounded text-xs font-medium">Save 17%</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Customer Information -->
+<div class="bg-white rounded-lg shadow-sm p-6">
+<h2 class="text-lg font-semibold mb-4">Customer Details</h2>
+<div class="space-y-4">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div>
+<label for="fullName" class="block text-sm font-medium text-gray-700 mb-1">Full Name <span class="text-red-500">*</span></label>
+<input type="text" id="fullName" class="w-full px-4 py-2.5 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary" required>
+</div>
+<div>
+<label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address <span class="text-red-500">*</span></label>
+<input type="email" id="email" class="w-full px-4 py-2.5 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary" required>
+</div>
+</div>
+<div>
+<label for="deviceModel" class="block text-sm font-medium text-gray-700 mb-1">Device Model <span class="text-red-500">*</span></label>
+<input type="text" id="deviceModel" class="w-full px-4 py-2.5 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="e.g. iPhone 14 Pro, Samsung Galaxy S23" required>
+</div>
+<div>
+<div class="flex items-center justify-between">
+<label for="imei" class="block text-sm font-medium text-gray-700 mb-1">Device IMEI (Optional)</label>
+<div class="relative group">
+<button type="button" class="text-gray-400 hover:text-gray-600">
+<i class="ri-information-line"></i>
+</button>
+<div class="absolute right-0 bottom-full mb-2 w-64 bg-gray-800 text-white text-xs rounded p-2 hidden group-hover:block z-10">
+You can find your IMEI by dialing *#06# on your device. This helps ensure compatibility with our eSIM.
+<div class="absolute top-full right-0 w-2 h-2 bg-gray-800 transform rotate-45 -mt-1 mr-2"></div>
+</div>
+</div>
+</div>
+<input type="text" id="imei" class="w-full px-4 py-2.5 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="15 digits number">
+</div>
+</div>
+</div>
+<!-- Payment Method -->
+<div class="bg-white rounded-lg shadow-sm p-6">
+<h2 class="text-lg font-semibold mb-4">Payment Method</h2>
+<div class="space-y-4">
+<!-- Credit Card -->
+<div class="border border-gray-200 rounded-lg p-4 hover:border-primary/50 transition cursor-pointer">
+<div class="flex items-center mb-4">
+<input type="radio" id="creditCard" name="paymentMethod" class="hidden" checked>
+<div class="custom-radio checked" data-name="paymentMethod"></div>
+<label for="creditCard" class="ml-2 font-medium cursor-pointer">Credit / Debit Card</label>
+<div class="ml-auto flex space-x-2">
+<div class="w-8 h-5 flex items-center justify-center">
+<i class="ri-visa-fill text-blue-700"></i>
+</div>
+<div class="w-8 h-5 flex items-center justify-center">
+<i class="ri-mastercard-fill text-red-500"></i>
+</div>
+<div class="w-8 h-5 flex items-center justify-center">
+<i class="ri-bank-card-fill text-gray-600"></i>
+</div>
+</div>
+</div>
+<div class="space-y-4" id="creditCardDetails">
+<div>
+<label for="cardNumber" class="block text-sm font-medium text-gray-700 mb-1">Card Number <span class="text-red-500">*</span></label>
+<div class="relative">
+<input type="text" id="cardNumber" class="w-full px-4 py-2.5 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="1234 5678 9012 3456" required>
+<div class="absolute right-3 top-1/2 transform -translate-y-1/2">
+<i class="ri-bank-card-line text-gray-400"></i>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label for="expiryDate" class="block text-sm font-medium text-gray-700 mb-1">Expiry Date <span class="text-red-500">*</span></label>
+<input type="text" id="expiryDate" class="w-full px-4 py-2.5 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="MM/YY" required>
+</div>
+<div>
+<label for="cvv" class="block text-sm font-medium text-gray-700 mb-1">CVV <span class="text-red-500">*</span></label>
+<div class="relative">
+<input type="text" id="cvv" class="w-full px-4 py-2.5 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="123" required>
+<div class="absolute right-3 top-1/2 transform -translate-y-1/2">
+<i class="ri-question-line text-gray-400"></i>
+</div>
+</div>
+</div>
+</div>
+<div>
+<label for="cardName" class="block text-sm font-medium text-gray-700 mb-1">Name on Card <span class="text-red-500">*</span></label>
+<input type="text" id="cardName" class="w-full px-4 py-2.5 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary" placeholder="John Smith" required>
+</div>
+</div>
+</div>
+<!-- PayPal -->
+<div class="border border-gray-200 rounded-lg p-4 hover:border-primary/50 transition cursor-pointer">
+<div class="flex items-center">
+<input type="radio" id="paypal" name="paymentMethod" class="hidden">
+<div class="custom-radio" data-name="paymentMethod"></div>
+<label for="paypal" class="ml-2 font-medium cursor-pointer">PayPal</label>
+<div class="ml-auto w-8 h-5 flex items-center justify-center">
+<i class="ri-paypal-fill text-blue-600"></i>
+</div>
+</div>
+</div>
+<!-- Apple Pay -->
+<div class="border border-gray-200 rounded-lg p-4 hover:border-primary/50 transition cursor-pointer">
+<div class="flex items-center">
+<input type="radio" id="applePay" name="paymentMethod" class="hidden">
+<div class="custom-radio" data-name="paymentMethod"></div>
+<label for="applePay" class="ml-2 font-medium cursor-pointer">Apple Pay</label>
+<div class="ml-auto w-8 h-5 flex items-center justify-center">
+<i class="ri-apple-fill text-gray-800"></i>
+</div>
+</div>
+</div>
+<!-- Google Pay -->
+<div class="border border-gray-200 rounded-lg p-4 hover:border-primary/50 transition cursor-pointer">
+<div class="flex items-center">
+<input type="radio" id="googlePay" name="paymentMethod" class="hidden">
+<div class="custom-radio" data-name="paymentMethod"></div>
+<label for="googlePay" class="ml-2 font-medium cursor-pointer">Google Pay</label>
+<div class="ml-auto w-8 h-5 flex items-center justify-center">
+<i class="ri-google-fill text-gray-800"></i>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column - Order Summary -->
+<div class="lg:col-span-1 space-y-6">
+<div class="bg-white rounded-lg shadow-sm p-6 sticky top-24">
+<h2 class="text-lg font-semibold mb-4">Order Summary</h2>
+<div class="space-y-3 mb-4">
+<div class="flex justify-between">
+<span class="text-gray-600">Europe Travel eSIM</span>
+<span>$24.99</span>
+</div>
+<div class="flex justify-between">
+<span class="text-gray-600">Discount</span>
+<span class="text-green-600">-$5.00</span>
+</div>
+<div class="flex justify-between">
+<span class="text-gray-600">Tax</span>
+<span>$2.50</span>
+</div>
+<div class="border-t border-gray-200 pt-3 mt-3">
+<div class="flex justify-between font-semibold">
+<span>Total</span>
+<span class="text-lg text-primary">$22.49</span>
+</div>
+</div>
+</div>
+<button id="completePurchase" class="w-full bg-primary text-white py-3 font-semibold rounded-button whitespace-nowrap hover:bg-primary/90 transition flex items-center justify-center">
+<span>Complete Purchase</span>
+</button>
+<div class="mt-4 flex items-center justify-center text-sm text-gray-500">
+<i class="ri-lock-line mr-1"></i>
+<span>Secure checkout</span>
+</div>
+<!-- eSIM Activation Guide -->
+<div class="mt-6 border-t border-gray-200 pt-4">
+<div class="flex items-center justify-between cursor-pointer" id="activationGuideToggle">
+<h3 class="font-medium">eSIM Activation Guide</h3>
+<div class="w-6 h-6 flex items-center justify-center text-gray-500" id="activationGuideIcon">
+<i class="ri-arrow-down-s-line"></i>
+</div>
+</div>
+<div class="mt-3 text-sm text-gray-600 hidden" id="activationGuideContent">
+<ol class="space-y-3">
+<li class="flex">
+<div class="flex-shrink-0 w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center text-primary mr-2">1</div>
+<div>After purchase, you'll receive a QR code via email.</div>
+</li>
+<li class="flex">
+<div class="flex-shrink-0 w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center text-primary mr-2">2</div>
+<div>Go to your device settings and select "Mobile Data" or "Cellular".</div>
+</li>
+<li class="flex">
+<div class="flex-shrink-0 w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center text-primary mr-2">3</div>
+<div>Tap "Add Data Plan" or "Add eSIM" and scan the QR code.</div>
+</li>
+<li class="flex">
+<div class="flex-shrink-0 w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center text-primary mr-2">4</div>
+<div>Follow the on-screen instructions to complete setup.</div>
+</li>
+<li class="flex">
+<div class="flex-shrink-0 w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center text-primary mr-2">5</div>
+<div>Turn on data roaming for your eSIM profile.</div>
+</li>
+</ol>
+<div class="mt-3 p-2 bg-yellow-50 rounded text-yellow-700 text-xs">
+<strong>Important:</strong> Make sure your device is eSIM compatible and unlocked before purchase.
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-gray-900 text-white pt-16 pb-8">
+<div class="container mx-auto px-4">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+<!-- Company Info -->
+<div>
+<a href="#" class="mb-6 inline-block">
+<img src="https://static.readdy.ai/image/70685381c99ca4e49dd877c3c9c9275a/8c0e71f0e9551716a2d424fb272e3c0f.jpeg" alt="Clarity eSIM" class="h-16 brightness-0 invert opacity-90">
+</a>
+<p class="text-gray-400 mb-6">Providing reliable global connectivity solutions for travelers since 2020. Stay connected anywhere in the world with our digital eSIM technology.</p>
+<div class="flex space-x-4">
+<a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition">
+<i class="ri-facebook-fill text-white"></i>
+</a>
+<a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition">
+<i class="ri-twitter-x-fill text-white"></i>
+</a>
+<a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition">
+<i class="ri-instagram-line text-white"></i>
+</a>
+<a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition">
+<i class="ri-linkedin-fill text-white"></i>
+</a>
+</div>
+</div>
+<!-- Quick Links -->
+<div>
+<h3 class="text-lg font-semibold mb-6">Quick Links</h3>
+<ul class="space-y-3">
+<li><a href="#" class="text-gray-400 hover:text-white transition">Home</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition">eSIM Plans</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition">Coverage Map</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition">How It Works</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition">Compatible Devices</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition">About Us</a></li>
+</ul>
+</div>
+<!-- Support -->
+<div>
+<h3 class="text-lg font-semibold mb-6">Support</h3>
+<ul class="space-y-3">
+<li><a href="#" class="text-gray-400 hover:text-white transition">Help Center</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition">FAQs</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition">Refund Policy</a></li>
+</ul>
+</div>
+<!-- Contact -->
+<div>
+<h3 class="text-lg font-semibold mb-6">Contact Us</h3>
+<ul class="space-y-3">
+<li class="flex items-start">
+<i class="ri-map-pin-line mr-3 mt-1 text-gray-400"></i>
+<span class="text-gray-400">123 Connectivity Street, Digital City, 10001</span>
+</li>
+<li class="flex items-center">
+<i class="ri-mail-line mr-3 text-gray-400"></i>
+<a href="mailto:support@travelesim.com" class="text-gray-400 hover:text-white transition">support@travelesim.com</a>
+</li>
+<li class="flex items-center">
+<i class="ri-phone-line mr-3 text-gray-400"></i>
+<a href="tel:+18001234567" class="text-gray-400 hover:text-white transition">+1 800 123 4567</a>
+</li>
+</ul>
+<h3 class="text-lg font-semibold mt-8 mb-4">We Accept</h3>
+<div class="flex flex-wrap gap-3">
+<div class="w-10 h-6 bg-white rounded flex items-center justify-center">
+<i class="ri-visa-fill text-blue-700 text-lg"></i>
+</div>
+<div class="w-10 h-6 bg-white rounded flex items-center justify-center">
+<i class="ri-mastercard-fill text-red-500 text-lg"></i>
+</div>
+<div class="w-10 h-6 bg-white rounded flex items-center justify-center">
+<i class="ri-paypal-fill text-blue-600 text-lg"></i>
+</div>
+<div class="w-10 h-6 bg-white rounded flex items-center justify-center">
+<i class="ri-apple-fill text-gray-800 text-lg"></i>
+</div>
+<div class="w-10 h-6 bg-white rounded flex items-center justify-center">
+<i class="ri-google-fill text-gray-800 text-lg"></i>
+</div>
+</div>
+</div>
+</div>
+<div class="border-t border-gray-800 pt-8">
+<div class="flex flex-col md:flex-row justify-between items-center">
+<p class="text-gray-500 text-sm mb-4 md:mb-0">© 2025 Clarity: Travel e-SIM. All rights reserved.</p>
+<div class="flex space-x-6">
+<a href="#" class="text-gray-500 hover:text-white text-sm transition">Privacy Policy</a>
+<a href="#" class="text-gray-500 hover:text-white text-sm transition">Terms of Service</a>
+<a href="#" class="text-gray-500 hover:text-white text-sm transition">Cookie Policy</a>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<!-- Success Modal -->
+<div id="successModal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+<div class="absolute inset-0 bg-black bg-opacity-50"></div>
+<div class="relative bg-white rounded-lg shadow-xl max-w-md w-full mx-4 p-6">
+<div class="text-center">
+<div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+<i class="ri-check-line text-green-600 text-3xl"></i>
+</div>
+<h3 class="text-xl font-bold mb-2">Purchase Successful!</h3>
+<p class="text-gray-600 mb-6">Your eSIM has been purchased successfully. Check your email for activation instructions.</p>
+<div class="flex flex-col space-y-3">
+<button id="viewOrderBtn" class="bg-primary text-white py-2.5 font-medium rounded-button whitespace-nowrap hover:bg-primary/90 transition">
+View Order Details
+</button>
+<button id="closeModalBtn" class="bg-gray-100 text-gray-700 py-2.5 font-medium rounded-button whitespace-nowrap hover:bg-gray-200 transition">
+Close
+</button>
+</div>
+</div>
+</div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+// Cart Dropdown Functionality
+const cartIcon = document.getElementById('cartIcon');
+const cartDropdown = document.getElementById('cartDropdown');
+let isCartOpen = false;
+if (cartIcon && cartDropdown) {
+cartIcon.addEventListener('click', function(e) {
+e.stopPropagation();
+isCartOpen = !isCartOpen;
+if (isCartOpen) {
+cartDropdown.classList.remove('hidden');
+} else {
+cartDropdown.classList.add('hidden');
+}
+});
+cartDropdown.addEventListener('click', function(e) {
+e.stopPropagation();
+});
+document.addEventListener('click', function() {
+if (isCartOpen) {
+cartDropdown.classList.add('hidden');
+isCartOpen = false;
+}
+});
+}
+// Custom Radio Functionality
+const customRadios = document.querySelectorAll('.custom-radio');
+customRadios.forEach(radio => {
+radio.addEventListener('click', function() {
+const name = this.dataset.name;
+if (name) {
+document.querySelectorAll(`.custom-radio[data-name="${name}"]`).forEach(r => {
+r.classList.remove('checked');
+});
+this.classList.add('checked');
+const input = document.getElementById(this.nextElementSibling.getAttribute('for'));
+if (input && input.type === 'radio') {
+input.checked = true;
+}
+}
+});
+});
+// Activation Guide Toggle
+const activationGuideToggle = document.getElementById('activationGuideToggle');
+const activationGuideContent = document.getElementById('activationGuideContent');
+const activationGuideIcon = document.getElementById('activationGuideIcon');
+activationGuideToggle.addEventListener('click', function() {
+activationGuideContent.classList.toggle('hidden');
+if (activationGuideContent.classList.contains('hidden')) {
+activationGuideIcon.innerHTML = '<i class="ri-arrow-down-s-line"></i>';
+} else {
+activationGuideIcon.innerHTML = '<i class="ri-arrow-up-s-line"></i>';
+}
+});
+// Form Validation
+const completePurchaseBtn = document.getElementById('completePurchase');
+const successModal = document.getElementById('successModal');
+const closeModalBtn = document.getElementById('closeModalBtn');
+const viewOrderBtn = document.getElementById('viewOrderBtn');
+completePurchaseBtn.addEventListener('click', function(e) {
+e.preventDefault();
+// Simple validation
+const fullName = document.getElementById('fullName').value;
+const email = document.getElementById('email').value;
+const deviceModel = document.getElementById('deviceModel').value;
+if (!fullName || !email || !deviceModel) {
+alert('Please fill in all required fields.');
+return;
+}
+// Show success modal
+successModal.classList.remove('hidden');
+});
+closeModalBtn.addEventListener('click', function() {
+successModal.classList.add('hidden');
+});
+viewOrderBtn.addEventListener('click', function() {
+// Redirect to order details page (placeholder)
+successModal.classList.add('hidden');
+alert('Redirecting to order details...');
+});
+// Card input formatting
+const cardNumberInput = document.getElementById('cardNumber');
+if (cardNumberInput) {
+cardNumberInput.addEventListener('input', function(e) {
+let value = e.target.value.replace(/\D/g, '');
+if (value.length > 16) value = value.slice(0, 16);
+// Format with spaces every 4 digits
+const formattedValue = value.replace(/(\d{4})(?=\d)/g, '$1 ');
+e.target.value = formattedValue;
+});
+}
+const expiryDateInput = document.getElementById('expiryDate');
+if (expiryDateInput) {
+expiryDateInput.addEventListener('input', function(e) {
+let value = e.target.value.replace(/\D/g, '');
+if (value.length > 4) value = value.slice(0, 4);
+// Format as MM/YY
+if (value.length > 2) {
+value = value.slice(0, 2) + '/' + value.slice(2);
+}
+e.target.value = value;
+});
+}
+const cvvInput = document.getElementById('cvv');
+if (cvvInput) {
+cvvInput.addEventListener('input', function(e) {
+let value = e.target.value.replace(/\D/g, '');
+if (value.length > 3) value = value.slice(0, 3);
+e.target.value = value;
+});
+}
+});
+</script>
+</body>
+</html>

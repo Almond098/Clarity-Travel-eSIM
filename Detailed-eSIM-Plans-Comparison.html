@@ -1,0 +1,1510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>eSIM Plans - Clarity: Travel e-SIM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#0066FF',
+secondary: '#FF6B00'
+},
+borderRadius: {
+'none': '0px',
+'sm': '4px',
+DEFAULT: '8px',
+'md': '12px',
+'lg': '16px',
+'xl': '20px',
+'2xl': '24px',
+'3xl': '32px',
+'full': '9999px',
+'button': '8px'
+},
+fontFamily: {
+'sans': ['Inter', 'sans-serif'],
+}
+}
+}
+}
+</script>
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+font-family: 'Inter', sans-serif;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+.custom-checkbox {
+position: relative;
+display: inline-block;
+width: 20px;
+height: 20px;
+border: 2px solid #d1d5db;
+border-radius: 4px;
+transition: all 0.2s;
+}
+.custom-checkbox.checked {
+background-color: #0066FF;
+border-color: #0066FF;
+}
+.custom-checkbox.checked::after {
+content: '';
+position: absolute;
+left: 6px;
+top: 2px;
+width: 5px;
+height: 10px;
+border: solid white;
+border-width: 0 2px 2px 0;
+transform: rotate(45deg);
+}
+.custom-radio {
+position: relative;
+display: inline-block;
+width: 20px;
+height: 20px;
+border: 2px solid #d1d5db;
+border-radius: 50%;
+transition: all 0.2s;
+}
+.custom-radio.checked {
+border-color: #0066FF;
+}
+.custom-radio.checked::after {
+content: '';
+position: absolute;
+left: 4px;
+top: 4px;
+width: 8px;
+height: 8px;
+border-radius: 50%;
+background-color: #0066FF;
+}
+.switch {
+position: relative;
+display: inline-block;
+width: 44px;
+height: 24px;
+}
+.switch-input {
+opacity: 0;
+width: 0;
+height: 0;
+}
+.switch-slider {
+position: absolute;
+cursor: pointer;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: #e5e7eb;
+transition: .4s;
+border-radius: 34px;
+}
+.switch-slider:before {
+position: absolute;
+content: "";
+height: 18px;
+width: 18px;
+left: 3px;
+bottom: 3px;
+background-color: white;
+transition: .4s;
+border-radius: 50%;
+}
+.switch-input:checked + .switch-slider {
+background-color: #0066FF;
+}
+.switch-input:checked + .switch-slider:before {
+transform: translateX(20px);
+}
+.range-slider {
+-webkit-appearance: none;
+width: 100%;
+height: 6px;
+border-radius: 5px;
+background: #e5e7eb;
+outline: none;
+}
+.range-slider::-webkit-slider-thumb {
+-webkit-appearance: none;
+appearance: none;
+width: 20px;
+height: 20px;
+border-radius: 50%;
+background: #0066FF;
+cursor: pointer;
+}
+.range-slider::-moz-range-thumb {
+width: 20px;
+height: 20px;
+border-radius: 50%;
+background: #0066FF;
+cursor: pointer;
+border: none;
+}
+.plan-card:hover {
+transform: translateY(-5px);
+box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+.filter-chip.active {
+background-color: #0066FF;
+color: white;
+}
+.comparison-bar {
+transform: translateY(100%);
+transition: transform 0.3s ease;
+}
+.comparison-bar.visible {
+transform: translateY(0);
+}
+</style>
+</head>
+<body class="bg-white text-gray-800">
+<!-- Header -->
+<header class="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
+<div class="container mx-auto px-4 py-3 flex items-center justify-between">
+<div class="flex items-center">
+<a href="#" class="mr-10">
+<img src="https://static.readdy.ai/image/70685381c99ca4e49dd877c3c9c9275a/8c0e71f0e9551716a2d424fb272e3c0f.jpeg" alt="Clarity eSIM" class="h-16 mix-blend-multiply">
+</a>
+<nav class="hidden md:flex space-x-8">
+<a href="https://readdy.ai/home/cb427912-1443-4d48-ab20-fc0dde936c49/24a98dbc-1119-4e00-a8a9-2f929b42c040" data-readdy="true" class="font-medium text-gray-600 hover:text-primary transition">Home</a>
+<a href="#" class="font-medium text-primary">eSIM Plans</a>
+<a href="https://readdy.ai/home/cb427912-1443-4d48-ab20-fc0dde936c49/8c9fa474-92c2-40d5-8e2b-2b88239fd9ff" data-readdy="true" class="font-medium text-gray-600 hover:text-primary transition">Coverage</a>
+<a href="#" class="font-medium text-gray-600 hover:text-primary transition">How It Works</a>
+<a href="#" class="font-medium text-gray-600 hover:text-primary transition">Support</a>
+</nav>
+</div>
+<div class="flex items-center space-x-6">
+<div class="relative hidden md:block">
+<input type="text" placeholder="Search country or region" class="pl-10 pr-4 py-2 rounded border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm w-64">
+<div class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center text-gray-400">
+<i class="ri-search-line"></i>
+</div>
+</div>
+<div class="w-10 h-10 flex items-center justify-center text-gray-600 hover:text-primary cursor-pointer relative">
+<i class="ri-shopping-cart-2-line text-xl"></i>
+<span class="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+</div>
+<div class="w-10 h-10 flex items-center justify-center text-gray-600 hover:text-primary cursor-pointer">
+<i class="ri-user-3-line text-xl"></i>
+</div>
+<button class="md:hidden w-10 h-10 flex items-center justify-center">
+<i class="ri-menu-line text-xl"></i>
+</button>
+</div>
+</div>
+</header>
+<!-- Breadcrumb -->
+<div class="bg-gray-50 pt-24 pb-4">
+<div class="container mx-auto px-4">
+<div class="flex items-center text-sm text-gray-500">
+<a href="https://readdy.ai/home/cb427912-1443-4d48-ab20-fc0dde936c49/24a98dbc-1119-4e00-a8a9-2f929b42c040" data-readdy="true" class="hover:text-primary transition">Home</a>
+<i class="ri-arrow-right-s-line mx-2"></i>
+<span class="text-gray-700 font-medium">eSIM Plans</span>
+</div>
+</div>
+</div>
+<!-- Page Title -->
+<section class="py-10 bg-gray-50">
+<div class="container mx-auto px-4">
+<div class="max-w-4xl mx-auto text-center">
+<h1 class="text-4xl font-bold mb-4">Find Your Perfect eSIM Plan</h1>
+<p class="text-gray-600 text-lg">Browse our wide selection of eSIM plans for over 190 countries and regions worldwide. Filter by destination, data needs, and budget to find your ideal connectivity solution.</p>
+</div>
+</div>
+</section>
+<!-- Filters Section -->
+<section class="py-8 bg-white border-b">
+<div class="container mx-auto px-4">
+<div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6">
+<div class="w-full lg:w-auto">
+<div class="relative">
+<input type="text" placeholder="Search for a country or region" class="pl-10 pr-4 py-3 rounded border border-gray-200 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm w-full lg:w-80">
+<div class="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center text-gray-400">
+<i class="ri-search-line"></i>
+</div>
+</div>
+</div>
+<div class="flex flex-wrap gap-3">
+<button class="filter-chip active px-4 py-2 rounded-full text-sm font-medium border transition whitespace-nowrap">All Regions</button>
+<button class="filter-chip px-4 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium text-gray-700 hover:bg-gray-50 transition whitespace-nowrap">Europe</button>
+<button class="filter-chip px-4 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium text-gray-700 hover:bg-gray-50 transition whitespace-nowrap">Asia</button>
+<button class="filter-chip px-4 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium text-gray-700 hover:bg-gray-50 transition whitespace-nowrap">Americas</button>
+<button class="filter-chip px-4 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium text-gray-700 hover:bg-gray-50 transition whitespace-nowrap">Africa</button>
+<button class="filter-chip px-4 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium text-gray-700 hover:bg-gray-50 transition whitespace-nowrap">Oceania</button>
+<button class="filter-chip px-4 py-2 bg-white border border-gray-200 rounded-full text-sm font-medium text-gray-700 hover:bg-gray-50 transition whitespace-nowrap">Global</button>
+</div>
+<button id="advancedFilterBtn" class="flex items-center text-primary font-medium hover:underline whitespace-nowrap">
+<i class="ri-filter-3-line mr-2"></i>
+<span>Advanced Filters</span>
+</button>
+</div>
+<!-- Advanced Filters (Hidden by default) -->
+<div id="advancedFilters" class="hidden mt-8 p-6 bg-gray-50 rounded-lg">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+<div>
+<h3 class="font-medium mb-3">Data Amount</h3>
+<div class="space-y-2">
+<label class="flex items-center">
+<input type="checkbox" class="hidden">
+<span class="custom-checkbox mr-2"></span>
+<span>1GB - 5GB</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" class="hidden">
+<span class="custom-checkbox mr-2"></span>
+<span>5GB - 10GB</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" class="hidden">
+<span class="custom-checkbox mr-2"></span>
+<span>10GB - 20GB</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" class="hidden">
+<span class="custom-checkbox mr-2"></span>
+<span>20GB+</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" class="hidden">
+<span class="custom-checkbox mr-2"></span>
+<span>Unlimited</span>
+</label>
+</div>
+</div>
+<div>
+<h3 class="font-medium mb-3">Validity Period</h3>
+<div class="space-y-2">
+<label class="flex items-center">
+<input type="checkbox" class="hidden">
+<span class="custom-checkbox mr-2"></span>
+<span>7 days</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" class="hidden">
+<span class="custom-checkbox mr-2"></span>
+<span>10 days</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" class="hidden">
+<span class="custom-checkbox mr-2"></span>
+<span>15 days</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" class="hidden">
+<span class="custom-checkbox mr-2"></span>
+<span>30 days</span>
+</label>
+<label class="flex items-center">
+<input type="checkbox" class="hidden">
+<span class="custom-checkbox mr-2"></span>
+<span>90 days</span>
+</label>
+</div>
+</div>
+<div>
+<h3 class="font-medium mb-3">Price Range</h3>
+<div class="px-2">
+<div class="flex justify-between mb-2">
+<span id="minPrice">$0</span>
+<span id="maxPrice">$100</span>
+</div>
+<input type="range" min="0" max="100" value="100" class="range-slider w-full" id="priceRange">
+</div>
+<div class="flex items-center mt-4">
+<label class="flex items-center">
+<input type="checkbox" class="hidden">
+<span class="custom-checkbox mr-2"></span>
+<span>Show discounted plans only</span>
+</label>
+</div>
+</div>
+</div>
+<div class="flex justify-end mt-6 gap-3">
+<button class="px-6 py-2 border border-gray-300 rounded-button text-gray-700 font-medium hover:bg-gray-50 transition whitespace-nowrap">Reset Filters</button>
+<button class="px-6 py-2 bg-primary text-white rounded-button font-medium hover:bg-primary/90 transition whitespace-nowrap">Apply Filters</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Plans Grid -->
+<section class="py-12">
+<div class="container mx-auto px-4">
+<div class="flex justify-between items-center mb-8">
+<h2 class="text-2xl font-bold">Available eSIM Plans</h2>
+<div class="flex items-center">
+<span class="text-gray-600 mr-3">Sort by:</span>
+<div class="relative">
+<button class="flex items-center bg-white border border-gray-200 rounded-lg px-4 py-2 text-sm font-medium">
+<span>Most Popular</span>
+<i class="ri-arrow-down-s-line ml-2"></i>
+</button>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Plan Card 1 -->
+<div class="bg-white rounded-lg shadow-sm overflow-hidden transition-all duration-300 plan-card">
+<div class="h-40 bg-gray-100 relative">
+<img src="https://readdy.ai/api/search-image?query=Beautiful%2520cityscape%2520of%2520Paris%2520with%2520Eiffel%2520Tower%2520visible%252C%2520modern%2520urban%2520landscape%2520with%2520iconic%2520landmarks%252C%2520clean%2520minimalist%2520style%252C%2520soft%2520lighting%252C%2520perfect%2520for%2520travel%2520website%252C%2520no%2520text%2520or%2520people%252C%2520high-quality%2520professional%2520travel%2520photography%2520with%2520natural%2520colors%2520and%2520balanced%2520composition&width=600&height=320&seq=1001&orientation=landscape" alt="Europe" class="w-full h-full object-cover object-top">
+<div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 flex items-center">
+<i class="ri-flag-line mr-2 text-blue-600"></i>
+<span class="font-medium">Europe</span>
+</div>
+<div class="absolute top-3 right-3">
+<label class="flex items-center justify-center w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full cursor-pointer">
+<input type="checkbox" class="hidden plan-compare" data-plan-id="1">
+<i class="ri-add-line compare-icon text-gray-600"></i>
+<i class="ri-check-line hidden compare-icon-checked text-primary"></i>
+</label>
+</div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-semibold text-lg">Europe Travel eSIM</h3>
+<p class="text-gray-500 text-sm">Valid in 30+ European countries</p>
+</div>
+<div class="bg-green-50 text-green-700 px-2 py-1 rounded text-xs font-medium">Most Popular</div>
+</div>
+<div class="space-y-3 mb-4">
+<div class="flex items-center justify-between text-gray-600">
+<div class="flex items-center">
+<i class="ri-wifi-line mr-2"></i>
+<span>Data</span>
+</div>
+<span class="font-medium">10GB</span>
+</div>
+<div class="flex items-center justify-between text-gray-600">
+<div class="flex items-center">
+<i class="ri-time-line mr-2"></i>
+<span>Validity</span>
+</div>
+<span class="font-medium">30 Days</span>
+</div>
+<div class="flex items-center justify-between text-gray-600">
+<div class="flex items-center">
+<i class="ri-signal-tower-line mr-2"></i>
+<span>Network</span>
+</div>
+<span class="font-medium">4G/5G</span>
+</div>
+</div>
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center">
+<i class="ri-information-line mr-1 text-gray-400"></i>
+<button class="text-primary text-sm hover:underline">View Details</button>
+</div>
+<div class="text-right">
+<div class="text-2xl font-bold text-primary">$24.99</div>
+<div class="text-gray-500 text-sm line-through">$29.99</div>
+</div>
+</div>
+<button class="w-full bg-primary text-white py-2.5 font-medium rounded-button whitespace-nowrap hover:bg-primary/90 transition">Buy Now</button>
+</div>
+</div>
+<!-- Plan Card 2 -->
+<div class="bg-white rounded-lg shadow-sm overflow-hidden transition-all duration-300 plan-card">
+<div class="h-40 bg-gray-100 relative">
+<img src="https://readdy.ai/api/search-image?query=Beautiful%2520cityscape%2520of%2520Tokyo%2520with%2520modern%2520skyscrapers%2520and%2520traditional%2520temples%252C%2520urban%2520landscape%2520with%2520iconic%2520landmarks%252C%2520clean%2520minimalist%2520style%252C%2520soft%2520lighting%252C%2520perfect%2520for%2520travel%2520website%252C%2520no%2520text%2520or%2520people%252C%2520high-quality%2520professional%2520travel%2520photography%2520with%2520natural%2520colors%2520and%2520balanced%2520composition&width=600&height=320&seq=1002&orientation=landscape" alt="Japan" class="w-full h-full object-cover object-top">
+<div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 flex items-center">
+<i class="ri-flag-line mr-2 text-red-600"></i>
+<span class="font-medium">Japan</span>
+</div>
+<div class="absolute top-3 right-3">
+<label class="flex items-center justify-center w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full cursor-pointer">
+<input type="checkbox" class="hidden plan-compare" data-plan-id="2">
+<i class="ri-add-line compare-icon text-gray-600"></i>
+<i class="ri-check-line hidden compare-icon-checked text-primary"></i>
+</label>
+</div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-semibold text-lg">Japan eSIM</h3>
+<p class="text-gray-500 text-sm">Nationwide coverage</p>
+</div>
+</div>
+<div class="space-y-3 mb-4">
+<div class="flex items-center justify-between text-gray-600">
+<div class="flex items-center">
+<i class="ri-wifi-line mr-2"></i>
+<span>Data</span>
+</div>
+<span class="font-medium">5GB</span>
+</div>
+<div class="flex items-center justify-between text-gray-600">
+<div class="flex items-center">
+<i class="ri-time-line mr-2"></i>
+<span>Validity</span>
+</div>
+<span class="font-medium">15 Days</span>
+</div>
+<div class="flex items-center justify-between text-gray-600">
+<div class="flex items-center">
+<i class="ri-signal-tower-line mr-2"></i>
+<span>Network</span>
+</div>
+<span class="font-medium">4G/5G</span>
+</div>
+</div>
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center">
+<i class="ri-information-line mr-1 text-gray-400"></i>
+<button class="text-primary text-sm hover:underline">View Details</button>
+</div>
+<div class="text-right">
+<div class="text-2xl font-bold text-primary">$19.99</div>
+</div>
+</div>
+<button class="w-full bg-primary text-white py-2.5 font-medium rounded-button whitespace-nowrap hover:bg-primary/90 transition">Buy Now</button>
+</div>
+</div>
+<!-- Plan Card 3 -->
+<div class="bg-white rounded-lg shadow-sm overflow-hidden transition-all duration-300 plan-card">
+<div class="h-40 bg-gray-100 relative">
+<img src="https://readdy.ai/api/search-image?query=Beautiful%2520cityscape%2520of%2520New%2520York%2520with%2520skyscrapers%2520and%2520Central%2520Park%252C%2520modern%2520urban%2520landscape%2520with%2520iconic%2520landmarks%252C%2520clean%2520minimalist%2520style%252C%2520soft%2520lighting%252C%2520perfect%2520for%2520travel%2520website%252C%2520no%2520text%2520or%2520people%252C%2520high-quality%2520professional%2520travel%2520photography%2520with%2520natural%2520colors%2520and%2520balanced%2520composition&width=600&height=320&seq=1003&orientation=landscape" alt="USA" class="w-full h-full object-cover object-top">
+<div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 flex items-center">
+<i class="ri-flag-line mr-2 text-blue-700"></i>
+<span class="font-medium">USA</span>
+</div>
+<div class="absolute top-3 right-3">
+<label class="flex items-center justify-center w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full cursor-pointer">
+<input type="checkbox" class="hidden plan-compare" data-plan-id="3">
+<i class="ri-add-line compare-icon text-gray-600"></i>
+<i class="ri-check-line hidden compare-icon-checked text-primary"></i>
+</label>
+</div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-semibold text-lg">USA Travel eSIM</h3>
+<p class="text-gray-500 text-sm">Nationwide 4G/5G coverage</p>
+</div>
+<div class="bg-blue-50 text-blue-700 px-2 py-1 rounded text-xs font-medium">New</div>
+</div>
+<div class="space-y-3 mb-4">
+<div class="flex items-center justify-between text-gray-600">
+<div class="flex items-center">
+<i class="ri-wifi-line mr-2"></i>
+<span>Data</span>
+</div>
+<span class="font-medium">Unlimited</span>
+</div>
+<div class="flex items-center justify-between text-gray-600">
+<div class="flex items-center">
+<i class="ri-time-line mr-2"></i>
+<span>Validity</span>
+</div>
+<span class="font-medium">10 Days</span>
+</div>
+<div class="flex items-center justify-between text-gray-600">
+<div class="flex items-center">
+<i class="ri-signal-tower-line mr-2"></i>
+<span>Network</span>
+</div>
+<span class="font-medium">4G/5G</span>
+</div>
+</div>
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center">
+<i class="ri-information-line mr-1 text-gray-400"></i>
+<button class="text-primary text-sm hover:underline">View Details</button>
+</div>
+<div class="text-right">
+<div class="text-2xl font-bold text-primary">$29.99</div>
+</div>
+</div>
+<button class="w-full bg-primary text-white py-2.5 font-medium rounded-button whitespace-nowrap hover:bg-primary/90 transition">Buy Now</button>
+</div>
+</div>
+<!-- Plan Card 4 -->
+<div class="bg-white rounded-lg shadow-sm overflow-hidden transition-all duration-300 plan-card">
+<div class="h-40 bg-gray-100 relative">
+<img src="https://readdy.ai/api/search-image?query=Beautiful%2520landscape%2520of%2520Thailand%2520with%2520beaches%2520and%2520temples%252C%2520tropical%2520paradise%2520with%2520iconic%2520landmarks%252C%2520clean%2520minimalist%2520style%252C%2520soft%2520lighting%252C%2520perfect%2520for%2520travel%2520website%252C%2520no%2520text%2520or%2520people%252C%2520high-quality%2520professional%2520travel%2520photography%2520with%2520natural%2520colors%2520and%2520balanced%2520composition&width=600&height=320&seq=1004&orientation=landscape" alt="Thailand" class="w-full h-full object-cover object-top">
+<div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 flex items-center">
+<i class="ri-flag-line mr-2 text-red-600"></i>
+<span class="font-medium">Thailand</span>
+</div>
+<div class="absolute top-3 right-3">
+<label class="flex items-center justify-center w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full cursor-pointer">
+<input type="checkbox" class="hidden plan-compare" data-plan-id="4">
+<i class="ri-add-line compare-icon text-gray-600"></i>
+<i class="ri-check-line hidden compare-icon-checked text-primary"></i>
+</label>
+</div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-semibold text-lg">Thailand eSIM</h3>
+<p class="text-gray-500 text-sm">Nationwide coverage</p>
+</div>
+</div>
+<div class="space-y-3 mb-4">
+<div class="flex items-center justify-between text-gray-600">
+<div class="flex items-center">
+<i class="ri-wifi-line mr-2"></i>
+<span>Data</span>
+</div>
+<span class="font-medium">8GB</span>
+</div>
+<div class="flex items-center justify-between text-gray-600">
+<div class="flex items-center">
+<i class="ri-time-line mr-2"></i>
+<span>Validity</span>
+</div>
+<span class="font-medium">15 Days</span>
+</div>
+<div class="flex items-center justify-between text-gray-600">
+<div class="flex items-center">
+<i class="ri-signal-tower-line mr-2"></i>
+<span>Network</span>
+</div>
+<span class="font-medium">4G/5G</span>
+</div>
+</div>
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center">
+<i class="ri-information-line mr-1 text-gray-400"></i>
+<button class="text-primary text-sm hover:underline">View Details</button>
+</div>
+<div class="text-right">
+<div class="text-2xl font-bold text-primary">$14.99</div>
+<div class="text-gray-500 text-sm line-through">$19.99</div>
+</div>
+</div>
+<button class="w-full bg-primary text-white py-2.5 font-medium rounded-button whitespace-nowrap hover:bg-primary/90 transition">Buy Now</button>
+</div>
+</div>
+<!-- Plan Card 5 -->
+<div class="bg-white rounded-lg shadow-sm overflow-hidden transition-all duration-300 plan-card">
+<div class="h-40 bg-gray-100 relative">
+<img src="https://readdy.ai/api/search-image?query=Beautiful%2520cityscape%2520of%2520London%2520with%2520iconic%2520landmarks%2520like%2520Big%2520Ben%2520and%2520Tower%2520Bridge%252C%2520modern%2520urban%2520landscape%252C%2520clean%2520minimalist%2520style%252C%2520soft%2520lighting%252C%2520perfect%2520for%2520travel%2520website%252C%2520no%2520text%2520or%2520people%252C%2520high-quality%2520professional%2520travel%2520photography%2520with%2520natural%2520colors%2520and%2520balanced%2520composition&width=600&height=320&seq=1005&orientation=landscape" alt="UK" class="w-full h-full object-cover object-top">
+<div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 flex items-center">
+<i class="ri-flag-line mr-2 text-blue-700"></i>
+<span class="font-medium">United Kingdom</span>
+</div>
+<div class="absolute top-3 right-3">
+<label class="flex items-center justify-center w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full cursor-pointer">
+<input type="checkbox" class="hidden plan-compare" data-plan-id="5">
+<i class="ri-add-line compare-icon text-gray-600"></i>
+<i class="ri-check-line hidden compare-icon-checked text-primary"></i>
+</label>
+</div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-semibold text-lg">UK eSIM</h3>
+<p class="text-gray-500 text-sm">Nationwide 4G/5G coverage</p>
+</div>
+</div>
+<div class="space-y-3 mb-4">
+<div class="flex items-center justify-between text-gray-600">
+<div class="flex items-center">
+<i class="ri-wifi-line mr-2"></i>
+<span>Data</span>
+</div>
+<span class="font-medium">12GB</span>
+</div>
+<div class="flex items-center justify-between text-gray-600">
+<div class="flex items-center">
+<i class="ri-time-line mr-2"></i>
+<span>Validity</span>
+</div>
+<span class="font-medium">30 Days</span>
+</div>
+<div class="flex items-center justify-between text-gray-600">
+<div class="flex items-center">
+<i class="ri-signal-tower-line mr-2"></i>
+<span>Network</span>
+</div>
+<span class="font-medium">4G/5G</span>
+</div>
+</div>
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center">
+<i class="ri-information-line mr-1 text-gray-400"></i>
+<button class="text-primary text-sm hover:underline">View Details</button>
+</div>
+<div class="text-right">
+<div class="text-2xl font-bold text-primary">$22.99</div>
+</div>
+</div>
+<button class="w-full bg-primary text-white py-2.5 font-medium rounded-button whitespace-nowrap hover:bg-primary/90 transition">Buy Now</button>
+</div>
+</div>
+<!-- Plan Card 6 -->
+<div class="bg-white rounded-lg shadow-sm overflow-hidden transition-all duration-300 plan-card">
+<div class="h-40 bg-gray-100 relative">
+<img src="https://readdy.ai/api/search-image?query=Beautiful%2520cityscape%2520of%2520Dubai%2520with%2520modern%2520skyscrapers%2520and%2520Burj%2520Khalifa%252C%2520desert%2520urban%2520landscape%2520with%2520iconic%2520landmarks%252C%2520clean%2520minimalist%2520style%252C%2520soft%2520lighting%252C%2520perfect%2520for%2520travel%2520website%252C%2520no%2520text%2520or%2520people%252C%2520high-quality%2520professional%2520travel%2520photography%2520with%2520natural%2520colors%2520and%2520balanced%2520composition&width=600&height=320&seq=1006&orientation=landscape" alt="UAE" class="w-full h-full object-cover object-top">
+<div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 flex items-center">
+<i class="ri-flag-line mr-2 text-green-600"></i>
+<span class="font-medium">UAE</span>
+</div>
+<div class="absolute top-3 right-3">
+<label class="flex items-center justify-center w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full cursor-pointer">
+<input type="checkbox" class="hidden plan-compare" data-plan-id="6">
+<i class="ri-add-line compare-icon text-gray-600"></i>
+<i class="ri-check-line hidden compare-icon-checked text-primary"></i>
+</label>
+</div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-semibold text-lg">UAE eSIM</h3>
+<p class="text-gray-500 text-sm">Dubai, Abu Dhabi & nationwide</p>
+</div>
+</div>
+<div class="space-y-3 mb-4">
+<div class="flex items-center justify-between text-gray-600">
+<div class="flex items-center">
+<i class="ri-wifi-line mr-2"></i>
+<span>Data</span>
+</div>
+<span class="font-medium">6GB</span>
+</div>
+<div class="flex items-center justify-between text-gray-600">
+<div class="flex items-center">
+<i class="ri-time-line mr-2"></i>
+<span>Validity</span>
+</div>
+<span class="font-medium">14 Days</span>
+</div>
+<div class="flex items-center justify-between text-gray-600">
+<div class="flex items-center">
+<i class="ri-signal-tower-line mr-2"></i>
+<span>Network</span>
+</div>
+<span class="font-medium">4G/5G</span>
+</div>
+</div>
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center">
+<i class="ri-information-line mr-1 text-gray-400"></i>
+<button class="text-primary text-sm hover:underline">View Details</button>
+</div>
+<div class="text-right">
+<div class="text-2xl font-bold text-primary">$24.99</div>
+</div>
+</div>
+<button class="w-full bg-primary text-white py-2.5 font-medium rounded-button whitespace-nowrap hover:bg-primary/90 transition">Buy Now</button>
+</div>
+</div>
+<!-- Plan Card 7 -->
+<div class="bg-white rounded-lg shadow-sm overflow-hidden transition-all duration-300 plan-card">
+<div class="h-40 bg-gray-100 relative">
+<img src="https://readdy.ai/api/search-image?query=Beautiful%2520landscape%2520of%2520Australia%2520with%2520Sydney%2520Opera%2520House%2520and%2520Harbour%2520Bridge%252C%2520modern%2520urban%2520landscape%2520with%2520iconic%2520landmarks%252C%2520clean%2520minimalist%2520style%252C%2520soft%2520lighting%252C%2520perfect%2520for%2520travel%2520website%252C%2520no%2520text%2520or%2520people%252C%2520high-quality%2520professional%2520travel%2520photography%2520with%2520natural%2520colors%2520and%2520balanced%2520composition&width=600&height=320&seq=1008&orientation=landscape" alt="Australia" class="w-full h-full object-cover object-top">
+<div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 flex items-center">
+<i class="ri-flag-line mr-2 text-blue-700"></i>
+<span class="font-medium">Australia</span>
+</div>
+<div class="absolute top-3 right-3">
+<label class="flex items-center justify-center w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full cursor-pointer">
+<input type="checkbox" class="hidden plan-compare" data-plan-id="7">
+<i class="ri-add-line compare-icon text-gray-600"></i>
+<i class="ri-check-line hidden compare-icon-checked text-primary"></i>
+</label>
+</div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-semibold text-lg">Australia eSIM</h3>
+<p class="text-gray-500 text-sm">Nationwide coverage</p>
+</div>
+</div>
+<div class="space-y-3 mb-4">
+<div class="flex items-center justify-between text-gray-600">
+<div class="flex items-center">
+<i class="ri-wifi-line mr-2"></i>
+<span>Data</span>
+</div>
+<span class="font-medium">20GB</span>
+</div>
+<div class="flex items-center justify-between text-gray-600">
+<div class="flex items-center">
+<i class="ri-time-line mr-2"></i>
+<span>Validity</span>
+</div>
+<span class="font-medium">30 Days</span>
+</div>
+<div class="flex items-center justify-between text-gray-600">
+<div class="flex items-center">
+<i class="ri-signal-tower-line mr-2"></i>
+<span>Network</span>
+</div>
+<span class="font-medium">4G/5G</span>
+</div>
+</div>
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center">
+<i class="ri-information-line mr-1 text-gray-400"></i>
+<button class="text-primary text-sm hover:underline">View Details</button>
+</div>
+<div class="text-right">
+<div class="text-2xl font-bold text-primary">$27.99</div>
+</div>
+</div>
+<button class="w-full bg-primary text-white py-2.5 font-medium rounded-button whitespace-nowrap hover:bg-primary/90 transition">Buy Now</button>
+</div>
+</div>
+<!-- Plan Card 8 -->
+<div class="bg-white rounded-lg shadow-sm overflow-hidden transition-all duration-300 plan-card">
+<div class="h-40 bg-gray-100 relative">
+<img src="https://readdy.ai/api/search-image?query=Beautiful%2520cityscape%2520of%2520Singapore%2520with%2520Marina%2520Bay%2520Sands%2520and%2520Gardens%2520by%2520the%2520Bay%252C%2520modern%2520urban%2520landscape%2520with%2520iconic%2520landmarks%252C%2520clean%2520minimalist%2520style%252C%2520soft%2520lighting%252C%2520perfect%2520for%2520travel%2520website%252C%2520no%2520text%2520or%2520people%252C%2520high-quality%2520professional%2520travel%2520photography%2520with%2520natural%2520colors%2520and%2520balanced%2520composition&width=600&height=320&seq=1007&orientation=landscape" alt="Singapore" class="w-full h-full object-cover object-top">
+<div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 flex items-center">
+<i class="ri-flag-line mr-2 text-red-600"></i>
+<span class="font-medium">Singapore</span>
+</div>
+<div class="absolute top-3 right-3">
+<label class="flex items-center justify-center w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full cursor-pointer">
+<input type="checkbox" class="hidden plan-compare" data-plan-id="8">
+<i class="ri-add-line compare-icon text-gray-600"></i>
+<i class="ri-check-line hidden compare-icon-checked text-primary"></i>
+</label>
+</div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-semibold text-lg">Singapore eSIM</h3>
+<p class="text-gray-500 text-sm">Nationwide 5G coverage</p>
+</div>
+</div>
+<div class="space-y-3 mb-4">
+<div class="flex items-center justify-between text-gray-600">
+<div class="flex items-center">
+<i class="ri-wifi-line mr-2"></i>
+<span>Data</span>
+</div>
+<span class="font-medium">100GB</span>
+</div>
+<div class="flex items-center justify-between text-gray-600">
+<div class="flex items-center">
+<i class="ri-time-line mr-2"></i>
+<span>Validity</span>
+</div>
+<span class="font-medium">10 Days</span>
+</div>
+<div class="flex items-center justify-between text-gray-600">
+<div class="flex items-center">
+<i class="ri-signal-tower-line mr-2"></i>
+<span>Network</span>
+</div>
+<span class="font-medium">4G/5G</span>
+</div>
+</div>
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center">
+<i class="ri-information-line mr-1 text-gray-400"></i>
+<button class="text-primary text-sm hover:underline">View Details</button>
+</div>
+<div class="text-right">
+<div class="text-2xl font-bold text-primary">$12.99</div>
+</div>
+</div>
+<button class="w-full bg-primary text-white py-2.5 font-medium rounded-button whitespace-nowrap hover:bg-primary/90 transition">Buy Now</button>
+</div>
+</div>
+<!-- Plan Card 9 -->
+<div class="bg-white rounded-lg shadow-sm overflow-hidden transition-all duration-300 plan-card">
+<div class="h-40 bg-gray-100 relative">
+<img src="https://readdy.ai/api/search-image?query=Beautiful%2520landscape%2520of%2520South%2520Korea%2520with%2520modern%2520Seoul%2520cityscape%2520and%2520traditional%2520temples%252C%2520urban%2520landscape%2520with%2520iconic%2520landmarks%252C%2520clean%2520minimalist%2520style%252C%2520soft%2520lighting%252C%2520perfect%2520for%2520travel%2520website%252C%2520no%2520text%2520or%2520people%252C%2520high-quality%2520professional%2520travel%2520photography%2520with%2520natural%2520colors%2520and%2520balanced%2520composition&width=600&height=320&seq=1009&orientation=landscape" alt="South Korea" class="w-full h-full object-cover object-top">
+<div class="absolute top-3 left-3 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 flex items-center">
+<i class="ri-flag-line mr-2 text-blue-700"></i>
+<span class="font-medium">South Korea</span>
+</div>
+<div class="absolute top-3 right-3">
+<label class="flex items-center justify-center w-8 h-8 bg-white/90 backdrop-blur-sm rounded-full cursor-pointer">
+<input type="checkbox" class="hidden plan-compare" data-plan-id="9">
+<i class="ri-add-line compare-icon text-gray-600"></i>
+<i class="ri-check-line hidden compare-icon-checked text-primary"></i>
+</label>
+</div>
+</div>
+<div class="p-5">
+<div class="flex justify-between items-start mb-4">
+<div>
+<h3 class="font-semibold text-lg">South Korea eSIM</h3>
+<p class="text-gray-500 text-sm">Nationwide 5G coverage</p>
+</div>
+<div class="bg-orange-50 text-orange-700 px-2 py-1 rounded text-xs font-medium">Hot Deal</div>
+</div>
+<div class="space-y-3 mb-4">
+<div class="flex items-center justify-between text-gray-600">
+<div class="flex items-center">
+<i class="ri-wifi-line mr-2"></i>
+<span>Data</span>
+</div>
+<span class="font-medium">10GB</span>
+</div>
+<div class="flex items-center justify-between text-gray-600">
+<div class="flex items-center">
+<i class="ri-time-line mr-2"></i>
+<span>Validity</span>
+</div>
+<span class="font-medium">7 Days</span>
+</div>
+<div class="flex items-center justify-between text-gray-600">
+<div class="flex items-center">
+<i class="ri-signal-tower-line mr-2"></i>
+<span>Network</span>
+</div>
+<span class="font-medium">4G/5G</span>
+</div>
+</div>
+<div class="flex items-center justify-between mb-4">
+<div class="flex items-center">
+<i class="ri-information-line mr-1 text-gray-400"></i>
+<button class="text-primary text-sm hover:underline">View Details</button>
+</div>
+<div class="text-right">
+<div class="text-2xl font-bold text-primary">$16.99</div>
+<div class="text-gray-500 text-sm line-through">$21.99</div>
+</div>
+</div>
+<button class="w-full bg-primary text-white py-2.5 font-medium rounded-button whitespace-nowrap hover:bg-primary/90 transition">Buy Now</button>
+</div>
+</div>
+</div>
+<div class="mt-12 text-center">
+<button class="bg-white border border-gray-300 text-gray-700 py-3 px-8 font-semibold rounded-button whitespace-nowrap hover:bg-gray-50 transition">
+Load More Plans
+<i class="ri-arrow-down-line ml-2"></i>
+</button>
+</div>
+</div>
+</section>
+<!-- Coverage Map -->
+<section class="py-16 bg-gray-50">
+<div class="container mx-auto px-4">
+<div class="text-center mb-12">
+<h2 class="text-3xl font-bold mb-4">Global Coverage Map</h2>
+<p class="text-gray-600 max-w-2xl mx-auto">Our eSIM service provides reliable connectivity in over 190 countries and territories worldwide. Check the coverage for your destination.</p>
+</div>
+<div class="bg-white rounded-lg overflow-hidden h-[500px] relative shadow-sm">
+<div class="absolute inset-0 bg-center bg-cover" style="background-image: url('https://public.readdy.ai/gen_page/map_placeholder_1280x720.png');"></div>
+<div class="absolute inset-0 bg-gradient-to-b from-transparent to-white/80 flex items-end justify-center pb-10">
+<button class="bg-primary text-white py-3 px-8 font-semibold rounded-button whitespace-nowrap hover:bg-primary/90 transition">
+Check Coverage for Your Destination
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Data Usage Calculator -->
+<section class="py-16 bg-white">
+<div class="container mx-auto px-4">
+<div class="max-w-4xl mx-auto">
+<div class="text-center mb-12">
+<h2 class="text-3xl font-bold mb-4">Data Usage Calculator</h2>
+<p class="text-gray-600 max-w-2xl mx-auto">Not sure how much data you need? Use our calculator to estimate your data usage based on your activities.</p>
+</div>
+<div class="bg-gray-50 rounded-lg p-8 shadow-sm">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div>
+<h3 class="font-semibold text-lg mb-4">Estimate Your Usage</h3>
+<div class="space-y-6">
+<div>
+<label class="block text-gray-700 mb-2">Social Media (hours/day)</label>
+<input type="range" min="0" max="8" value="2" class="range-slider w-full" id="socialMediaSlider">
+<div class="flex justify-between mt-1 text-sm text-gray-500">
+<span>0h</span>
+<span id="socialMediaValue">2h</span>
+<span>8h</span>
+</div>
+</div>
+<div>
+<label class="block text-gray-700 mb-2">Web Browsing (hours/day)</label>
+<input type="range" min="0" max="8" value="1" class="range-slider w-full" id="browsingSlider">
+<div class="flex justify-between mt-1 text-sm text-gray-500">
+<span>0h</span>
+<span id="browsingValue">1h</span>
+<span>8h</span>
+</div>
+</div>
+<div>
+<label class="block text-gray-700 mb-2">Video Streaming (hours/day)</label>
+<input type="range" min="0" max="8" value="1" class="range-slider w-full" id="videoSlider">
+<div class="flex justify-between mt-1 text-sm text-gray-500">
+<span>0h</span>
+<span id="videoValue">1h</span>
+<span>8h</span>
+</div>
+</div>
+<div>
+<label class="block text-gray-700 mb-2">Maps & Navigation (hours/day)</label>
+<input type="range" min="0" max="8" value="1" class="range-slider w-full" id="mapsSlider">
+<div class="flex justify-between mt-1 text-sm text-gray-500">
+<span>0h</span>
+<span id="mapsValue">1h</span>
+<span>8h</span>
+</div>
+</div>
+</div>
+</div>
+<div>
+<h3 class="font-semibold text-lg mb-4">Your Estimated Usage</h3>
+<div class="bg-white rounded-lg p-6 h-64 mb-4" id="usageChart"></div>
+<div class="bg-primary/10 rounded-lg p-4">
+<div class="flex justify-between items-center">
+<span class="font-medium">Estimated Daily Usage:</span>
+<span class="font-bold text-primary" id="dailyUsage">1.25 GB</span>
+</div>
+<div class="flex justify-between items-center mt-2">
+<span class="font-medium">Recommended Plan for 7 Days:</span>
+<span class="font-bold text-primary">10 GB Plan</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- FAQ Section -->
+<section class="py-16 bg-gray-50">
+<div class="container mx-auto px-4">
+<div class="max-w-3xl mx-auto">
+<div class="text-center mb-12">
+<h2 class="text-3xl font-bold mb-4">Frequently Asked Questions</h2>
+<p class="text-gray-600">Find answers to common questions about our eSIM plans and services.</p>
+</div>
+<div class="space-y-4">
+<div class="bg-white rounded-lg shadow-sm overflow-hidden">
+<button class="faq-question w-full px-6 py-4 text-left font-medium flex justify-between items-center">
+<span>What is an eSIM and how does it work?</span>
+<i class="ri-arrow-down-s-line text-xl transition-transform faq-arrow"></i>
+</button>
+<div class="faq-answer px-6 py-4 border-t border-gray-100 hidden">
+<p class="text-gray-600">An eSIM (embedded SIM) is a digital SIM that allows you to activate a cellular plan without having to use a physical SIM card. It's built into your device and can be programmed remotely. To use our eSIM, simply purchase a plan, scan the QR code we provide, and follow the activation instructions on your device.</p>
+</div>
+</div>
+<div class="bg-white rounded-lg shadow-sm overflow-hidden">
+<button class="faq-question w-full px-6 py-4 text-left font-medium flex justify-between items-center">
+<span>Which devices are compatible with eSIM?</span>
+<i class="ri-arrow-down-s-line text-xl transition-transform faq-arrow"></i>
+</button>
+<div class="faq-answer px-6 py-4 border-t border-gray-100 hidden">
+<p class="text-gray-600">Most modern smartphones, tablets, and smartwatches support eSIM technology. This includes iPhone XS and newer, Google Pixel 3 and newer, Samsung Galaxy S20 and newer, and many other devices. You can check our compatibility page or your device manufacturer's specifications to confirm if your device supports eSIM.</p>
+</div>
+</div>
+<div class="bg-white rounded-lg shadow-sm overflow-hidden">
+<button class="faq-question w-full px-6 py-4 text-left font-medium flex justify-between items-center">
+<span>Can I use my phone number with the eSIM?</span>
+<i class="ri-arrow-down-s-line text-xl transition-transform faq-arrow"></i>
+</button>
+<div class="faq-answer px-6 py-4 border-t border-gray-100 hidden">
+<p class="text-gray-600">Our travel eSIMs provide data connectivity only and do not include a phone number. However, most modern smartphones support Dual SIM functionality, allowing you to keep your regular SIM card with your phone number active while using our eSIM for data. This way, you can receive calls and texts on your regular number while using data from our eSIM.</p>
+</div>
+</div>
+<div class="bg-white rounded-lg shadow-sm overflow-hidden">
+<button class="faq-question w-full px-6 py-4 text-left font-medium flex justify-between items-center">
+<span>How do I activate my eSIM?</span>
+<i class="ri-arrow-down-s-line text-xl transition-transform faq-arrow"></i>
+</button>
+<div class="faq-answer px-6 py-4 border-t border-gray-100 hidden">
+<p class="text-gray-600">After purchasing an eSIM plan, you'll receive a QR code via email. On your device, go to Settings > Cellular/Mobile Data > Add Cellular/Data Plan, then scan the QR code. Follow the on-screen instructions to complete the activation. The process takes just a few minutes, and we provide detailed step-by-step guides for different device models.</p>
+</div>
+</div>
+<div class="bg-white rounded-lg shadow-sm overflow-hidden">
+<button class="faq-question w-full px-6 py-4 text-left font-medium flex justify-between items-center">
+<span>Can I extend my plan if I need more data or time?</span>
+<i class="ri-arrow-down-s-line text-xl transition-transform faq-arrow"></i>
+</button>
+<div class="faq-answer px-6 py-4 border-t border-gray-100 hidden">
+<p class="text-gray-600">Yes, you can purchase additional data or extend the validity period of your existing plan through your account dashboard. Simply log in, select your active plan, and choose the extension option. The additional data or time will be added to your existing plan without needing to activate a new eSIM.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Comparison Bar (Fixed at bottom, initially hidden) -->
+<div id="comparisonBar" class="comparison-bar fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t border-gray-200 p-4 z-40">
+<div class="container mx-auto px-4">
+<div class="flex items-center justify-between">
+<div class="flex items-center">
+<span class="font-medium mr-4">Selected Plans: <span id="selectedCount">0</span>/3</span>
+<div id="selectedPlans" class="flex space-x-2"></div>
+</div>
+<div class="flex items-center space-x-4">
+<button id="clearSelection" class="text-gray-600 hover:text-gray-800 font-medium">
+Clear Selection
+</button>
+<button id="comparePlans" class="bg-primary text-white py-2 px-6 rounded-button font-medium hover:bg-primary/90 transition whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed">
+Compare Plans
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Comparison Modal (Hidden by default) -->
+<div id="comparisonModal" class="fixed inset-0 bg-black/50 z-50 hidden flex items-center justify-center p-4">
+<div class="bg-white rounded-lg w-full max-w-5xl max-h-[90vh] overflow-auto">
+<div class="p-6 border-b sticky top-0 bg-white z-10 flex justify-between items-center">
+<h3 class="text-xl font-bold">Compare eSIM Plans</h3>
+<button id="closeModal" class="text-gray-500 hover:text-gray-700">
+<i class="ri-close-line text-2xl"></i>
+</button>
+</div>
+<div class="p-6">
+<div class="grid grid-cols-4 gap-4">
+<div class="border-r pr-4">
+<div class="h-40"></div>
+<div class="font-medium py-4 border-b">Country/Region</div>
+<div class="font-medium py-4 border-b">Data Amount</div>
+<div class="font-medium py-4 border-b">Validity Period</div>
+<div class="font-medium py-4 border-b">Network Type</div>
+<div class="font-medium py-4 border-b">Coverage</div>
+<div class="font-medium py-4 border-b">Speed Cap</div>
+<div class="font-medium py-4 border-b">Tethering</div>
+<div class="font-medium py-4 border-b">Auto-Renewal</div>
+<div class="font-medium py-4 border-b">Price</div>
+<div class="font-medium py-4">Action</div>
+</div>
+<div id="plan1" class="text-center">
+<div class="h-40 bg-gray-100 rounded-lg mb-4 overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=Beautiful%2520cityscape%2520of%2520Paris%2520with%2520Eiffel%2520Tower%2520visible%252C%2520modern%2520urban%2520landscape%2520with%2520iconic%2520landmarks%252C%2520clean%2520minimalist%2520style%252C%2520soft%2520lighting%252C%2520perfect%2520for%2520travel%2520website%252C%2520no%2520text%2520or%2520people%252C%2520high-quality%2520professional%2520travel%2520photography%2520with%2520natural%2520colors%2520and%2520balanced%2520composition&width=300&height=160&seq=1001&orientation=landscape" alt="Europe" class="w-full h-full object-cover object-top">
+</div>
+<div class="py-4 border-b">Europe (30+ countries)</div>
+<div class="py-4 border-b">10GB</div>
+<div class="py-4 border-b">30 Days</div>
+<div class="py-4 border-b">4G/5G</div>
+<div class="py-4 border-b">Excellent</div>
+<div class="py-4 border-b">No Cap</div>
+<div class="py-4 border-b">Yes</div>
+<div class="py-4 border-b">Optional</div>
+<div class="py-4 border-b font-bold text-primary">$24.99</div>
+<div class="py-4">
+<button class="bg-primary text-white py-2 px-4 rounded-button text-sm font-medium hover:bg-primary/90 transition whitespace-nowrap">Buy Now</button>
+</div>
+</div>
+<div id="plan2" class="text-center">
+<div class="h-40 bg-gray-100 rounded-lg mb-4 overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=Beautiful%2520cityscape%2520of%2520Tokyo%2520with%2520modern%2520skyscrapers%2520and%2520traditional%2520temples%252C%2520urban%2520landscape%2520with%2520iconic%2520landmarks%252C%2520clean%2520minimalist%2520style%252C%2520soft%2520lighting%252C%2520perfect%2520for%2520travel%2520website%252C%2520no%2520text%2520or%2520people%252C%2520high-quality%2520professional%2520travel%2520photography%2520with%2520natural%2520colors%2520and%2520balanced%2520composition&width=300&height=160&seq=1002&orientation=landscape" alt="Japan" class="w-full h-full object-cover object-top">
+</div>
+<div class="py-4 border-b">Japan</div>
+<div class="py-4 border-b">5GB</div>
+<div class="py-4 border-b">15 Days</div>
+<div class="py-4 border-b">4G/5G</div>
+<div class="py-4 border-b">Very Good</div>
+<div class="py-4 border-b">No Cap</div>
+<div class="py-4 border-b">Yes</div>
+<div class="py-4 border-b">No</div>
+<div class="py-4 border-b font-bold text-primary">$19.99</div>
+<div class="py-4">
+<button class="bg-primary text-white py-2 px-4 rounded-button text-sm font-medium hover:bg-primary/90 transition whitespace-nowrap">Buy Now</button>
+</div>
+</div>
+<div id="plan3" class="text-center">
+<div class="h-40 bg-gray-100 rounded-lg mb-4 overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=Beautiful%2520cityscape%2520of%2520New%2520York%2520with%2520skyscrapers%2520and%2520Central%2520Park%252C%2520modern%2520urban%2520landscape%2520with%2520iconic%2520landmarks%252C%2520clean%2520minimalist%2520style%252C%2520soft%2520lighting%252C%2520perfect%2520for%2520travel%2520website%252C%2520no%2520text%2520or%2520people%252C%2520high-quality%2520professional%2520travel%2520photography%2520with%2520natural%2520colors%2520and%2520balanced%2520composition&width=300&height=160&seq=1003&orientation=landscape" alt="USA" class="w-full h-full object-cover object-top">
+</div>
+<div class="py-4 border-b">USA</div>
+<div class="py-4 border-b">Unlimited</div>
+<div class="py-4 border-b">10 Days</div>
+<div class="py-4 border-b">4G/5G</div>
+<div class="py-4 border-b">Excellent</div>
+<div class="py-4 border-b">No Cap</div>
+<div class="py-4 border-b">Yes</div>
+<div class="py-4 border-b">Optional</div>
+<div class="py-4 border-b font-bold text-primary">$29.99</div>
+<div class="py-4">
+<button class="bg-primary text-white py-2 px-4 rounded-button text-sm font-medium hover:bg-primary/90 transition whitespace-nowrap">Buy Now</button>
+</div>
+</div>
+</div>
+<div class="mt-8 p-4 bg-gray-50 rounded-lg">
+<h4 class="font-medium mb-2">Key Differences</h4>
+<ul class="space-y-2 text-gray-600">
+<li><span class="font-medium">Data Amount:</span> USA plan offers unlimited data, while Europe (10GB) and Japan (5GB) have fixed data caps.</li>
+<li><span class="font-medium">Validity Period:</span> Europe plan has the longest validity at 30 days, compared to Japan (15 days) and USA (10 days).</li>
+<li><span class="font-medium">Price per GB:</span> Singapore offers the best value at approximately $0.13/GB, while Japan is the most expensive at $4/GB.</li>
+</ul>
+</div>
+</div>
+<div class="p-6 border-t bg-gray-50">
+<div class="flex justify-between items-center">
+<div class="text-gray-600">
+<i class="ri-information-line mr-1"></i>
+<span>Need help choosing? Contact our support team for personalized recommendations.</span>
+</div>
+<button class="bg-white border border-gray-300 text-gray-700 py-2 px-6 rounded-button font-medium hover:bg-gray-50 transition whitespace-nowrap">
+Contact Support
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="bg-gray-900 text-white pt-16 pb-8">
+<div class="container mx-auto px-4">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+<!-- Company Info -->
+<div>
+<a href="#" class="mb-6 inline-block">
+<img src="https://static.readdy.ai/image/70685381c99ca4e49dd877c3c9c9275a/8c0e71f0e9551716a2d424fb272e3c0f.jpeg" alt="Clarity eSIM" class="h-16 brightness-0 invert opacity-90">
+</a>
+<p class="text-gray-400 mb-6">Providing reliable global connectivity solutions for travelers since 2020. Stay connected anywhere in the world with our digital eSIM technology.</p>
+<div class="flex space-x-4">
+<a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition">
+<i class="ri-facebook-fill text-white"></i>
+</a>
+<a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition">
+<i class="ri-twitter-x-fill text-white"></i>
+</a>
+<a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition">
+<i class="ri-instagram-line text-white"></i>
+</a>
+<a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition">
+<i class="ri-linkedin-fill text-white"></i>
+</a>
+</div>
+</div>
+<!-- Quick Links -->
+<div>
+<h3 class="text-lg font-semibold mb-6">Quick Links</h3>
+<ul class="space-y-3">
+<li><a href="https://readdy.ai/home/cb427912-1443-4d48-ab20-fc0dde936c49/24a98dbc-1119-4e00-a8a9-2f929b42c040" data-readdy="true" class="text-gray-400 hover:text-white transition">Home</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition">eSIM Plans</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition">Coverage Map</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition">How It Works</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition">Compatible Devices</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition">About Us</a></li>
+</ul>
+</div>
+<!-- Support -->
+<div>
+<h3 class="text-lg font-semibold mb-6">Support</h3>
+<ul class="space-y-3">
+<li><a href="#" class="text-gray-400 hover:text-white transition">Help Center</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition">FAQs</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition">Refund Policy</a></li>
+</ul>
+</div>
+<!-- Contact -->
+<div>
+<h3 class="text-lg font-semibold mb-6">Contact Us</h3>
+<ul class="space-y-3">
+<li class="flex items-start">
+<i class="ri-map-pin-line mr-3 mt-1 text-gray-400"></i>
+<span class="text-gray-400">123 Connectivity Street, Digital City, 10001</span>
+</li>
+<li class="flex items-center">
+<i class="ri-mail-line mr-3 text-gray-400"></i>
+<a href="mailto:support@travelesim.com" class="text-gray-400 hover:text-white transition">support@travelesim.com</a>
+</li>
+<li class="flex items-center">
+<i class="ri-phone-line mr-3 text-gray-400"></i>
+<a href="tel:+18001234567" class="text-gray-400 hover:text-white transition">+1 800 123 4567</a>
+</li>
+</ul>
+<h3 class="text-lg font-semibold mt-8 mb-4">We Accept</h3>
+<div class="flex flex-wrap gap-3">
+<div class="w-10 h-6 bg-white rounded flex items-center justify-center">
+<i class="ri-visa-fill text-blue-700 text-lg"></i>
+</div>
+<div class="w-10 h-6 bg-white rounded flex items-center justify-center">
+<i class="ri-mastercard-fill text-red-500 text-lg"></i>
+</div>
+<div class="w-10 h-6 bg-white rounded flex items-center justify-center">
+<i class="ri-paypal-fill text-blue-600 text-lg"></i>
+</div>
+<div class="w-10 h-6 bg-white rounded flex items-center justify-center">
+<i class="ri-apple-fill text-gray-800 text-lg"></i>
+</div>
+<div class="w-10 h-6 bg-white rounded flex items-center justify-center">
+<i class="ri-google-fill text-gray-800 text-lg"></i>
+</div>
+</div>
+</div>
+</div>
+<div class="border-t border-gray-800 pt-8">
+<div class="flex flex-col md:flex-row justify-between items-center">
+<p class="text-gray-500 text-sm mb-4 md:mb-0">© 2025 Clarity: Travel e-SIM. All rights reserved.</p>
+<div class="flex space-x-6">
+<a href="#" class="text-gray-500 hover:text-white text-sm transition">Privacy Policy</a>
+<a href="#" class="text-gray-500 hover:text-white text-sm transition">Terms of Service</a>
+<a href="#" class="text-gray-500 hover:text-white text-sm transition">Cookie Policy</a>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+// Advanced Filters Toggle
+const advancedFilterBtn = document.getElementById('advancedFilterBtn');
+const advancedFilters = document.getElementById('advancedFilters');
+advancedFilterBtn.addEventListener('click', function() {
+advancedFilters.classList.toggle('hidden');
+});
+// Custom Checkbox Functionality
+const customCheckboxes = document.querySelectorAll('.custom-checkbox');
+customCheckboxes.forEach(checkbox => {
+checkbox.addEventListener('click', function() {
+this.classList.toggle('checked');
+const input = this.previousElementSibling;
+if (input && input.type === 'checkbox') {
+input.checked = !input.checked;
+}
+});
+});
+// Filter Chips
+const filterChips = document.querySelectorAll('.filter-chip');
+const planCards = document.querySelectorAll('.plan-card');
+filterChips.forEach(chip => {
+chip.addEventListener('click', function() {
+filterChips.forEach(c => c.classList.remove('active'));
+this.classList.add('active');
+const selectedRegion = this.textContent.trim();
+planCards.forEach(card => {
+const cardRegion = card.querySelector('.absolute.top-3.left-3 span').textContent.trim();
+if (selectedRegion === 'All Regions') {
+card.style.display = 'block';
+} else {
+if (selectedRegion === 'Europe' && cardRegion.includes('Europe')) {
+card.style.display = 'block';
+} else if (selectedRegion === 'Asia' && (cardRegion === 'Japan' || cardRegion === 'Thailand' || cardRegion === 'Singapore' || cardRegion === 'South Korea')) {
+card.style.display = 'block';
+} else if (selectedRegion === 'Americas' && cardRegion === 'USA') {
+card.style.display = 'block';
+} else if (selectedRegion === 'Oceania' && cardRegion === 'Australia') {
+card.style.display = 'block';
+} else if (selectedRegion === 'Global' && cardRegion.includes('Europe')) {
+card.style.display = 'block';
+} else {
+card.style.display = 'none';
+}
+}
+// Add fade effect
+card.style.opacity = '0';
+setTimeout(() => {
+if (card.style.display === 'block') {
+card.style.opacity = '1';
+}
+}, 50);
+});
+});
+});
+// Add transition style to plan cards
+planCards.forEach(card => {
+card.style.transition = 'opacity 0.3s ease';
+});
+// Price Range Slider
+const priceRange = document.getElementById('priceRange');
+const maxPrice = document.getElementById('maxPrice');
+priceRange.addEventListener('input', function() {
+maxPrice.textContent = '$' + this.value;
+});
+// FAQ Accordion
+const faqQuestions = document.querySelectorAll('.faq-question');
+faqQuestions.forEach(question => {
+question.addEventListener('click', function() {
+const answer = this.nextElementSibling;
+const arrow = this.querySelector('.faq-arrow');
+answer.classList.toggle('hidden');
+arrow.style.transform = answer.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+});
+});
+// Plan Comparison Functionality
+const planCompareCheckboxes = document.querySelectorAll('.plan-compare');
+const comparisonBar = document.getElementById('comparisonBar');
+const selectedCount = document.getElementById('selectedCount');
+const selectedPlans = document.getElementById('selectedPlans');
+const comparePlansBtn = document.getElementById('comparePlans');
+const clearSelectionBtn = document.getElementById('clearSelection');
+const comparisonModal = document.getElementById('comparisonModal');
+const closeModalBtn = document.getElementById('closeModal');
+// Update comparison bar and selected plans
+function updateComparisonBar() {
+const checkedPlans = document.querySelectorAll('.plan-compare:checked');
+const count = checkedPlans.length;
+selectedCount.textContent = count;
+selectedPlans.innerHTML = '';
+checkedPlans.forEach((plan, index) => {
+const planId = plan.getAttribute('data-plan-id');
+const planCard = plan.closest('.plan-card');
+const planImage = planCard.querySelector('img').src;
+const planName = planCard.querySelector('h3').textContent;
+const planThumb = document.createElement('div');
+planThumb.className = 'relative';
+planThumb.innerHTML = `
+<div class="w-10 h-10 rounded-full bg-gray-100 overflow-hidden border border-gray-200">
+<img src="${planImage}" alt="${planName}" class="w-full h-full object-cover">
+</div>
+<span class="absolute -top-1 -right-1 w-4 h-4 bg-primary text-white rounded-full text-xs flex items-center justify-center">${index + 1}</span>
+`;
+selectedPlans.appendChild(planThumb);
+});
+if (count > 0) {
+comparisonBar.classList.add('visible');
+} else {
+comparisonBar.classList.remove('visible');
+}
+comparePlansBtn.disabled = count < 2;
+}
+// Handle plan selection
+planCompareCheckboxes.forEach(checkbox => {
+checkbox.addEventListener('change', function() {
+const checkedPlans = document.querySelectorAll('.plan-compare:checked');
+const label = this.parentElement;
+const addIcon = label.querySelector('.compare-icon');
+const checkIcon = label.querySelector('.compare-icon-checked');
+if (checkedPlans.length > 3 && this.checked) {
+this.checked = false;
+alert('You can compare up to 3 plans at a time.');
+return;
+}
+if (this.checked) {
+addIcon.classList.add('hidden');
+checkIcon.classList.remove('hidden');
+} else {
+addIcon.classList.remove('hidden');
+checkIcon.classList.add('hidden');
+}
+updateComparisonBar();
+});
+});
+// Clear selection
+clearSelectionBtn.addEventListener('click', function() {
+planCompareCheckboxes.forEach(checkbox => {
+checkbox.checked = false;
+const label = checkbox.parentElement;
+const addIcon = label.querySelector('.compare-icon');
+const checkIcon = label.querySelector('.compare-icon-checked');
+addIcon.classList.remove('hidden');
+checkIcon.classList.add('hidden');
+});
+updateComparisonBar();
+});
+// Open comparison modal
+comparePlansBtn.addEventListener('click', function() {
+comparisonModal.classList.remove('hidden');
+});
+// Close comparison modal
+closeModalBtn.addEventListener('click', function() {
+comparisonModal.classList.add('hidden');
+});
+// Data Usage Calculator
+const socialMediaSlider = document.getElementById('socialMediaSlider');
+const browsingSlider = document.getElementById('browsingSlider');
+const videoSlider = document.getElementById('videoSlider');
+const mapsSlider = document.getElementById('mapsSlider');
+const socialMediaValue = document.getElementById('socialMediaValue');
+const browsingValue = document.getElementById('browsingValue');
+const videoValue = document.getElementById('videoValue');
+const mapsValue = document.getElementById('mapsValue');
+const dailyUsage = document.getElementById('dailyUsage');
+function updateSliderValues() {
+socialMediaValue.textContent = socialMediaSlider.value + 'h';
+browsingValue.textContent = browsingSlider.value + 'h';
+videoValue.textContent = videoSlider.value + 'h';
+mapsValue.textContent = mapsSlider.value + 'h';
+// Calculate estimated usage (simplified calculation)
+const socialMediaUsage = socialMediaSlider.value * 0.1; // 100MB per hour
+const browsingUsage = browsingSlider.value * 0.05; // 50MB per hour
+const videoUsage = videoSlider.value * 0.7; // 700MB per hour
+const mapsUsage = mapsSlider.value * 0.1; // 100MB per hour
+const totalUsage = socialMediaUsage + browsingUsage + videoUsage + mapsUsage;
+dailyUsage.textContent = totalUsage.toFixed(2) + ' GB';
+updateUsageChart(socialMediaUsage, browsingUsage, videoUsage, mapsUsage);
+}
+// Initialize ECharts
+const chartDom = document.getElementById('usageChart');
+const myChart = echarts.init(chartDom);
+function updateUsageChart(social, browsing, video, maps) {
+const option = {
+animation: false,
+tooltip: {
+trigger: 'item',
+formatter: '{b}: {c} GB ({d}%)',
+backgroundColor: 'rgba(255, 255, 255, 0.8)',
+borderColor: '#eee',
+borderWidth: 1,
+textStyle: {
+color: '#1f2937'
+}
+},
+legend: {
+bottom: '0%',
+left: 'center',
+textStyle: {
+color: '#1f2937'
+}
+},
+series: [
+{
+name: 'Daily Usage',
+type: 'pie',
+radius: ['40%', '70%'],
+avoidLabelOverlap: false,
+itemStyle: {
+borderRadius: 8,
+borderColor: '#fff',
+borderWidth: 2
+},
+label: {
+show: false
+},
+emphasis: {
+label: {
+show: true,
+fontSize: '12',
+fontWeight: 'bold'
+}
+},
+labelLine: {
+show: false
+},
+data: [
+{ value: social, name: 'Social Media', itemStyle: { color: 'rgba(87, 181, 231, 1)' } },
+{ value: browsing, name: 'Web Browsing', itemStyle: { color: 'rgba(141, 211, 199, 1)' } },
+{ value: video, name: 'Video Streaming', itemStyle: { color: 'rgba(251, 191, 114, 1)' } },
+{ value: maps, name: 'Maps & Navigation', itemStyle: { color: 'rgba(252, 141, 98, 1)' } }
+]
+}
+]
+};
+myChart.setOption(option);
+}
+socialMediaSlider.addEventListener('input', updateSliderValues);
+browsingSlider.addEventListener('input', updateSliderValues);
+videoSlider.addEventListener('input', updateSliderValues);
+mapsSlider.addEventListener('input', updateSliderValues);
+// Initialize values
+updateSliderValues();
+// Handle window resize for chart
+window.addEventListener('resize', function() {
+myChart.resize();
+});
+});
+</script>
+</body>
+</html>

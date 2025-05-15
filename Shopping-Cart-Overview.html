@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shopping Cart - Clarity: Travel e-SIM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#0066FF',
+secondary: '#FF6B00'
+},
+borderRadius: {
+'none': '0px',
+'sm': '4px',
+DEFAULT: '8px',
+'md': '12px',
+'lg': '16px',
+'xl': '20px',
+'2xl': '24px',
+'3xl': '32px',
+'full': '9999px',
+'button': '8px'
+},
+fontFamily: {
+'sans': ['Inter', 'sans-serif'],
+}
+}
+}
+}
+</script>
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+font-family: 'Inter', sans-serif;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+</style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+<div id="toastNotification" class="fixed top-4 right-4 z-50 transform translate-x-full opacity-0 transition-all duration-300">
+<div class="bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg flex items-center">
+<i class="ri-checkbox-circle-line mr-2 text-xl"></i>
+<span>Item added to cart successfully!</span>
+</div>
+</div>
+<!-- Header -->
+<header class="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
+<div class="container mx-auto px-4 py-3 flex items-center justify-between">
+<div class="flex items-center">
+<a href="#" class="mr-10">
+<img src="https://static.readdy.ai/image/70685381c99ca4e49dd877c3c9c9275a/8c0e71f0e9551716a2d424fb272e3c0f.jpeg" alt="Clarity eSIM" class="h-16 mix-blend-multiply">
+</a>
+<nav class="hidden md:flex space-x-8">
+<a href="#" class="font-medium text-gray-600 hover:text-primary transition">Home</a>
+<a href="https://readdy.ai/home/cb427912-1443-4d48-ab20-fc0dde936c49/63ab3200-098a-4f6b-9bbe-d9a5afe0266a" data-readdy="true" class="font-medium text-gray-600 hover:text-primary transition">eSIM Plans</a>
+<a href="https://readdy.ai/home/cb427912-1443-4d48-ab20-fc0dde936c49/9f6f1281-b2d7-4e66-89d8-1237312625b3" data-readdy="true" class="font-medium text-gray-600 hover:text-primary transition">Coverage</a>
+<a href="#" class="font-medium text-gray-600 hover:text-primary transition">How It Works</a>
+<a href="#" class="font-medium text-gray-600 hover:text-primary transition">Support</a>
+</nav>
+</div>
+<div class="flex items-center space-x-6">
+<div id="cartIcon" class="w-10 h-10 flex items-center justify-center text-gray-600 hover:text-primary cursor-pointer relative">
+<i class="ri-shopping-cart-2-line text-xl"></i>
+<span class="absolute -top-1 -right-1 bg-primary text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">3</span>
+<div id="cartDropdown" class="hidden absolute top-full right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-100 z-50">
+<div class="p-4">
+<div class="flex items-center justify-between pb-4 border-b border-gray-100">
+<h3 class="font-semibold">Shopping Cart</h3>
+<span class="text-sm text-gray-500">3 items</span>
+</div>
+<div class="py-4 max-h-64 overflow-y-auto">
+<div class="flex items-center gap-3 mb-3">
+<div class="w-16 h-16 flex-shrink-0 rounded-lg overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=Europe%252520travel%252520map%252520with%252520iconic%252520landmarks%252520like%252520Eiffel%252520Tower%252520and%252520Colosseum%25252C%252520digital%252520illustration%252520with%252520clean%252520lines%252520and%252520minimalist%252520style%25252C%252520perfect%252520for%252520travel%252520website%25252C%252520blue%252520and%252520white%252520color%252520scheme%25252C%252520professional%252520quality&width=200&height=200&seq=2001&orientation=squarish" alt="Europe Travel eSIM" class="w-full h-full object-cover object-top">
+</div>
+<div class="flex-grow">
+<h4 class="font-medium text-sm">Europe Travel eSIM</h4>
+<p class="text-xs text-gray-500">10GB Data - 30 Days</p>
+<div class="flex items-center justify-between mt-1">
+<span class="text-primary font-medium">$24.99</span>
+<div class="flex items-center gap-2">
+<button class="w-6 h-6 flex items-center justify-center text-gray-500 hover:text-primary bg-gray-50 rounded">-</button>
+<span class="text-sm">1</span>
+<button class="w-6 h-6 flex items-center justify-center text-gray-500 hover:text-primary bg-gray-50 rounded">+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3 mb-3">
+<div class="w-16 h-16 flex-shrink-0 rounded-lg overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=Asia%252520travel%252520map%252520with%252520iconic%252520landmarks%252520like%252520Great%252520Wall%252520of%252520China%252520and%252520Tokyo%252520Tower%25252C%252520digital%252520illustration%252520with%252520clean%252520lines%252520and%252520minimalist%252520style%25252C%252520perfect%252520for%252520travel%252520website%25252C%252520blue%252520and%252520white%252520color%252520scheme%25252C%252520professional%252520quality&width=200&height=200&seq=2002&orientation=squarish" alt="Asia Travel eSIM" class="w-full h-full object-cover object-top">
+</div>
+<div class="flex-grow">
+<h4 class="font-medium text-sm">Asia Travel eSIM</h4>
+<p class="text-xs text-gray-500">5GB Data - 14 Days</p>
+<div class="flex items-center justify-between mt-1">
+<span class="text-primary font-medium">$19.99</span>
+<div class="flex items-center gap-2">
+<button class="w-6 h-6 flex items-center justify-center text-gray-500 hover:text-primary bg-gray-50 rounded">-</button>
+<span class="text-sm">1</span>
+<button class="w-6 h-6 flex items-center justify-center text-gray-500 hover:text-primary bg-gray-50 rounded">+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-16 h-16 flex-shrink-0 rounded-lg overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=Global%252520travel%252520map%252520with%252520iconic%252520landmarks%252520from%252520around%252520the%252520world%25252C%252520digital%252520illustration%252520with%252520clean%252520lines%252520and%252520minimalist%252520style%25252C%252520perfect%252520for%252520travel%252520website%25252C%252520blue%252520and%252520white%252520color%252520scheme%25252C%252520professional%252520quality&width=200&height=200&seq=2003&orientation=squarish" alt="Global Travel eSIM" class="w-full h-full object-cover object-top">
+</div>
+<div class="flex-grow">
+<h4 class="font-medium text-sm">Global Travel eSIM</h4>
+<p class="text-xs text-gray-500">3GB Data - 7 Days</p>
+<div class="flex items-center justify-between mt-1">
+<span class="text-primary font-medium">$14.99</span>
+<div class="flex items-center gap-2">
+<button class="w-6 h-6 flex items-center justify-center text-gray-500 hover:text-primary bg-gray-50 rounded">-</button>
+<span class="text-sm">1</span>
+<button class="w-6 h-6 flex items-center justify-center text-gray-500 hover:text-primary bg-gray-50 rounded">+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="pt-4 border-t border-gray-100">
+<div class="flex items-center justify-between mb-4">
+<span class="font-medium">Total:</span>
+<span class="font-semibold text-primary">$59.97</span>
+</div>
+<div class="flex flex-col gap-2">
+<a href="https://readdy.ai/home/cb427912-1443-4d48-ab20-fc0dde936c49/38758307-a552-4629-9f27-d3e46fea17e4" data-readdy="true" class="bg-gray-100 text-gray-700 py-2 text-center font-medium rounded-button whitespace-nowrap hover:bg-gray-200 transition">View Cart</a>
+<a href="#" class="bg-primary text-white py-2 text-center font-medium rounded-button whitespace-nowrap hover:bg-primary/90 transition">Checkout</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="w-10 h-10 flex items-center justify-center text-gray-600 hover:text-primary cursor-pointer">
+<i class="ri-user-3-line text-xl"></i>
+</div>
+<button class="md:hidden w-10 h-10 flex items-center justify-center">
+<i class="ri-menu-line text-xl"></i>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="pt-24 pb-16">
+<div class="container mx-auto px-4">
+<!-- Cart Header -->
+<div class="flex items-center mb-8">
+<a href="https://readdy.ai/home/cb427912-1443-4d48-ab20-fc0dde936c49/38758307-a552-4629-9f27-d3e46fea17e4" data-readdy="true" class="w-10 h-10 flex items-center justify-center text-gray-600 hover:text-primary bg-white rounded-full shadow-sm">
+<i class="ri-arrow-left-s-line text-xl"></i>
+</a>
+<h1 class="text-2xl font-bold ml-4">Shopping Cart</h1>
+</div>
+<!-- Cart Content -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Left Column - Cart Items -->
+<div class="lg:col-span-2">
+<div class="bg-white rounded-lg shadow-sm p-6 mb-6">
+<div class="flex items-center justify-between pb-4 border-b border-gray-100">
+<h2 class="text-lg font-semibold">Cart Items (3)</h2>
+<button id="clearCartBtn" class="text-gray-500 hover:text-red-500 text-sm flex items-center">
+<i class="ri-delete-bin-line mr-1"></i>
+<span>Clear Cart</span>
+</button>
+</div>
+<!-- Cart Items List -->
+<div class="divide-y divide-gray-100">
+<!-- Item 1 -->
+<div class="py-6 flex flex-col md:flex-row gap-4">
+<div class="w-full md:w-24 h-24 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
+<img src="https://readdy.ai/api/search-image?query=Europe%252520travel%252520map%252520with%252520iconic%252520landmarks%252520like%252520Eiffel%252520Tower%252520and%252520Colosseum%25252C%252520digital%252520illustration%252520with%252520clean%252520lines%252520and%252520minimalist%252520style%25252C%252520perfect%252520for%252520travel%252520website%25252C%252520blue%252520and%252520white%252520color%252520scheme%25252C%252520professional%252520quality&width=200&height=200&seq=2001&orientation=squarish" alt="Europe Travel eSIM" class="w-full h-full object-cover object-top">
+</div>
+<div class="flex-grow">
+<div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+<div>
+<h3 class="font-semibold text-lg">Europe Travel eSIM</h3>
+<p class="text-gray-500 text-sm mb-2">Valid in 30+ European countries</p>
+<div class="flex flex-wrap gap-4 mb-3">
+<div class="flex items-center text-gray-600 text-sm">
+<i class="ri-wifi-line mr-2 text-primary"></i>
+<span>10GB Data</span>
+</div>
+<div class="flex items-center text-gray-600 text-sm">
+<i class="ri-time-line mr-2 text-primary"></i>
+<span>30 Days Validity</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<div class="flex items-center">
+<span class="text-xl font-bold text-primary">$24.99</span>
+<span class="text-gray-500 text-sm line-through ml-2">$29.99</span>
+</div>
+<div class="flex items-center mt-3">
+<button class="quantity-btn w-8 h-8 flex items-center justify-center text-gray-500 hover:text-primary bg-gray-100 rounded-full" data-action="decrease">
+<i class="ri-subtract-line"></i>
+</button>
+<input type="number" class="quantity-input w-12 h-8 mx-2 text-center border-none bg-transparent" value="1" min="1" max="10">
+<button class="quantity-btn w-8 h-8 flex items-center justify-center text-gray-500 hover:text-primary bg-gray-100 rounded-full" data-action="increase">
+<i class="ri-add-line"></i>
+</button>
+</div>
+</div>
+</div>
+<div class="flex justify-between items-center mt-4">
+<button class="text-gray-500 hover:text-primary text-sm flex items-center">
+<i class="ri-heart-line mr-1"></i>
+<span>Save for Later</span>
+</button>
+<button class="text-gray-500 hover:text-red-500 text-sm flex items-center">
+<i class="ri-delete-bin-line mr-1"></i>
+<span>Remove</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="py-6 flex flex-col md:flex-row gap-4">
+<div class="w-full md:w-24 h-24 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
+<img src="https://readdy.ai/api/search-image?query=Asia%252520travel%252520map%252520with%252520iconic%252520landmarks%252520like%252520Great%252520Wall%252520of%252520China%252520and%252520Tokyo%252520Tower%25252C%252520digital%252520illustration%252520with%252520clean%252520lines%252520and%252520minimalist%252520style%25252C%252520perfect%252520for%252520travel%252520website%25252C%252520blue%252520and%252520white%252520color%252520scheme%25252C%252520professional%252520quality&width=200&height=200&seq=2002&orientation=squarish" alt="Asia Travel eSIM" class="w-full h-full object-cover object-top">
+</div>
+<div class="flex-grow">
+<div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+<div>
+<h3 class="font-semibold text-lg">Asia Travel eSIM</h3>
+<p class="text-gray-500 text-sm mb-2">Valid in 15+ Asian countries</p>
+<div class="flex flex-wrap gap-4 mb-3">
+<div class="flex items-center text-gray-600 text-sm">
+<i class="ri-wifi-line mr-2 text-primary"></i>
+<span>5GB Data</span>
+</div>
+<div class="flex items-center text-gray-600 text-sm">
+<i class="ri-time-line mr-2 text-primary"></i>
+<span>14 Days Validity</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<div class="flex items-center">
+<span class="text-xl font-bold text-primary">$19.99</span>
+<span class="text-gray-500 text-sm line-through ml-2">$24.99</span>
+</div>
+<div class="flex items-center mt-3">
+<button class="quantity-btn w-8 h-8 flex items-center justify-center text-gray-500 hover:text-primary bg-gray-100 rounded-full" data-action="decrease">
+<i class="ri-subtract-line"></i>
+</button>
+<input type="number" class="quantity-input w-12 h-8 mx-2 text-center border-none bg-transparent" value="1" min="1" max="10">
+<button class="quantity-btn w-8 h-8 flex items-center justify-center text-gray-500 hover:text-primary bg-gray-100 rounded-full" data-action="increase">
+<i class="ri-add-line"></i>
+</button>
+</div>
+</div>
+</div>
+<div class="flex justify-between items-center mt-4">
+<button class="text-gray-500 hover:text-primary text-sm flex items-center">
+<i class="ri-heart-line mr-1"></i>
+<span>Save for Later</span>
+</button>
+<button class="text-gray-500 hover:text-red-500 text-sm flex items-center">
+<i class="ri-delete-bin-line mr-1"></i>
+<span>Remove</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="py-6 flex flex-col md:flex-row gap-4">
+<div class="w-full md:w-24 h-24 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
+<img src="https://readdy.ai/api/search-image?query=Global%252520travel%252520map%252520with%252520iconic%252520landmarks%252520from%252520around%252520the%252520world%25252C%252520digital%252520illustration%252520with%252520clean%252520lines%252520and%252520minimalist%252520style%25252C%252520perfect%252520for%252520travel%252520website%25252C%252520blue%252520and%252520white%252520color%252520scheme%25252C%252520professional%252520quality&width=200&height=200&seq=2003&orientation=squarish" alt="Global Travel eSIM" class="w-full h-full object-cover object-top">
+</div>
+<div class="flex-grow">
+<div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+<div>
+<h3 class="font-semibold text-lg">Global Travel eSIM</h3>
+<p class="text-gray-500 text-sm mb-2">Valid in 100+ countries worldwide</p>
+<div class="flex flex-wrap gap-4 mb-3">
+<div class="flex items-center text-gray-600 text-sm">
+<i class="ri-wifi-line mr-2 text-primary"></i>
+<span>3GB Data</span>
+</div>
+<div class="flex items-center text-gray-600 text-sm">
+<i class="ri-time-line mr-2 text-primary"></i>
+<span>7 Days Validity</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<div class="flex items-center">
+<span class="text-xl font-bold text-primary">$14.99</span>
+<span class="text-gray-500 text-sm line-through ml-2">$19.99</span>
+</div>
+<div class="flex items-center mt-3">
+<button class="quantity-btn w-8 h-8 flex items-center justify-center text-gray-500 hover:text-primary bg-gray-100 rounded-full" data-action="decrease">
+<i class="ri-subtract-line"></i>
+</button>
+<input type="number" class="quantity-input w-12 h-8 mx-2 text-center border-none bg-transparent" value="1" min="1" max="10">
+<button class="quantity-btn w-8 h-8 flex items-center justify-center text-gray-500 hover:text-primary bg-gray-100 rounded-full" data-action="increase">
+<i class="ri-add-line"></i>
+</button>
+</div>
+</div>
+</div>
+<div class="flex justify-between items-center mt-4">
+<button class="text-gray-500 hover:text-primary text-sm flex items-center">
+<i class="ri-heart-line mr-1"></i>
+<span>Save for Later</span>
+</button>
+<button class="text-gray-500 hover:text-red-500 text-sm flex items-center">
+<i class="ri-delete-bin-line mr-1"></i>
+<span>Remove</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Saved for Later Section -->
+<div class="bg-white rounded-lg shadow-sm p-6">
+<div class="flex items-center justify-between pb-4 border-b border-gray-100">
+<h2 class="text-lg font-semibold">Saved for Later (1)</h2>
+</div>
+<div class="py-6 flex flex-col md:flex-row gap-4">
+<div class="w-full md:w-24 h-24 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
+<img src="https://readdy.ai/api/search-image?query=North%252520America%252520travel%252520map%252520with%252520iconic%252520landmarks%252520like%252520Statue%252520of%252520Liberty%252520and%252520Golden%252520Gate%252520Bridge%25252C%252520digital%252520illustration%252520with%252520clean%252520lines%252520and%252520minimalist%252520style%25252C%252520perfect%252520for%252520travel%252520website%25252C%252520blue%252520and%252520white%252520color%252520scheme%25252C%252520professional%252520quality&width=200&height=200&seq=2004&orientation=squarish" alt="North America Travel eSIM" class="w-full h-full object-cover object-top">
+</div>
+<div class="flex-grow">
+<div class="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+<div>
+<h3 class="font-semibold text-lg">North America Travel eSIM</h3>
+<p class="text-gray-500 text-sm mb-2">Valid in USA, Canada, and Mexico</p>
+<div class="flex flex-wrap gap-4 mb-3">
+<div class="flex items-center text-gray-600 text-sm">
+<i class="ri-wifi-line mr-2 text-primary"></i>
+<span>8GB Data</span>
+</div>
+<div class="flex items-center text-gray-600 text-sm">
+<i class="ri-time-line mr-2 text-primary"></i>
+<span>15 Days Validity</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-end">
+<span class="text-xl font-bold text-primary">$22.99</span>
+<button class="mt-3 px-4 py-2 bg-gray-100 text-gray-700 rounded-button whitespace-nowrap hover:bg-gray-200 transition text-sm">
+Move to Cart
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column - Order Summary -->
+<div class="lg:col-span-1">
+<div class="bg-white rounded-lg shadow-sm p-6 sticky top-24">
+<h2 class="text-lg font-semibold mb-4">Order Summary</h2>
+<div class="space-y-3 mb-4">
+<div class="flex justify-between">
+<span class="text-gray-600">Subtotal (3 items)</span>
+<span>$59.97</span>
+</div>
+<div class="flex justify-between">
+<span class="text-gray-600">Discount</span>
+<span class="text-green-600">-$15.00</span>
+</div>
+<div class="flex justify-between">
+<span class="text-gray-600">Estimated Tax</span>
+<span>$4.50</span>
+</div>
+<div class="border-t border-gray-200 pt-3 mt-3">
+<div class="flex justify-between font-semibold">
+<span>Total</span>
+<span class="text-lg text-primary">$49.47</span>
+</div>
+</div>
+</div>
+<!-- Promo Code -->
+<div class="mb-6">
+<div class="flex items-center mb-2">
+<h3 class="text-sm font-medium">Apply Promo Code</h3>
+</div>
+<div class="flex">
+<input type="text" placeholder="Enter code" class="flex-grow px-4 py-2.5 rounded-l border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary text-sm">
+<button class="bg-primary text-white px-4 py-2.5 rounded-r-button whitespace-nowrap hover:bg-primary/90 transition text-sm">Apply</button>
+</div>
+</div>
+<!-- Checkout Buttons -->
+<div class="space-y-3">
+<a href="https://readdy.ai/home/cb427912-1443-4d48-ab20-fc0dde936c49/38758307-a552-4629-9f27-d3e46fea17e4" data-readdy="true" class="block w-full bg-gray-100 text-gray-700 py-3 font-medium rounded-button whitespace-nowrap hover:bg-gray-200 transition text-center">
+Continue Shopping
+</a>
+<button class="w-full bg-primary text-white py-3 font-semibold rounded-button whitespace-nowrap hover:bg-primary/90 transition flex items-center justify-center">
+<span>Proceed to Checkout</span>
+<i class="ri-arrow-right-line ml-1"></i>
+</button>
+</div>
+<!-- Secure Checkout -->
+<div class="mt-6 border-t border-gray-200 pt-4">
+<div class="flex flex-col gap-3">
+<div class="flex items-center text-sm text-gray-600">
+<i class="ri-shield-check-line text-green-600 mr-2"></i>
+<span>Secure checkout</span>
+</div>
+<div class="flex items-center text-sm text-gray-600">
+<i class="ri-time-line text-green-600 mr-2"></i>
+<span>Instant delivery via email</span>
+</div>
+<div class="flex items-center text-sm text-gray-600">
+<i class="ri-customer-service-2-line text-green-600 mr-2"></i>
+<span>24/7 customer support</span>
+</div>
+</div>
+</div>
+<!-- Payment Methods -->
+<div class="mt-6 border-t border-gray-200 pt-4">
+<h3 class="text-sm font-medium mb-3">We Accept</h3>
+<div class="flex flex-wrap gap-2">
+<div class="w-10 h-6 bg-white border border-gray-200 rounded flex items-center justify-center">
+<i class="ri-visa-fill text-blue-700 text-lg"></i>
+</div>
+<div class="w-10 h-6 bg-white border border-gray-200 rounded flex items-center justify-center">
+<i class="ri-mastercard-fill text-red-500 text-lg"></i>
+</div>
+<div class="w-10 h-6 bg-white border border-gray-200 rounded flex items-center justify-center">
+<i class="ri-paypal-fill text-blue-600 text-lg"></i>
+</div>
+<div class="w-10 h-6 bg-white border border-gray-200 rounded flex items-center justify-center">
+<i class="ri-apple-fill text-gray-800 text-lg"></i>
+</div>
+<div class="w-10 h-6 bg-white border border-gray-200 rounded flex items-center justify-center">
+<i class="ri-google-fill text-gray-800 text-lg"></i>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- You May Also Like Section -->
+<div class="mt-12">
+<h2 class="text-xl font-bold mb-6">You May Also Like</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- Recommendation 1 -->
+<div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition">
+<div class="h-40 overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=Australia%252520and%252520New%252520Zealand%252520travel%252520map%252520with%252520iconic%252520landmarks%252520like%252520Sydney%252520Opera%252520House%252520and%252520Auckland%252520Sky%252520Tower%25252C%252520digital%252520illustration%252520with%252520clean%252520lines%252520and%252520minimalist%252520style%25252C%252520perfect%252520for%252520travel%252520website%25252C%252520blue%252520and%252520white%252520color%252520scheme%25252C%252520professional%252520quality&width=400&height=300&seq=2005&orientation=landscape" alt="Australia & NZ Travel eSIM" class="w-full h-full object-cover object-top">
+</div>
+<div class="p-4">
+<h3 class="font-semibold">Australia & NZ Travel eSIM</h3>
+<p class="text-gray-500 text-sm mb-2">Valid in Australia and New Zealand</p>
+<div class="flex flex-wrap gap-3 mb-3">
+<div class="flex items-center text-gray-600 text-xs">
+<i class="ri-wifi-line mr-1 text-primary"></i>
+<span>6GB Data</span>
+</div>
+<div class="flex items-center text-gray-600 text-xs">
+<i class="ri-time-line mr-1 text-primary"></i>
+<span>15 Days</span>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<span class="text-primary font-bold">$21.99</span>
+<span class="text-gray-500 text-xs line-through ml-1">$26.99</span>
+</div>
+<button id="addToCartBtn1" class="px-3 py-1.5 bg-gray-100 text-gray-700 rounded-button whitespace-nowrap hover:bg-gray-200 transition text-sm">
+Add to Cart
+</button>
+</div>
+</div>
+</div>
+<!-- Recommendation 2 -->
+<div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition">
+<div class="h-40 overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=Middle%252520East%252520travel%252520map%252520with%252520iconic%252520landmarks%252520like%252520Burj%252520Khalifa%252520and%252520Petra%25252C%252520digital%252520illustration%252520with%252520clean%252520lines%252520and%252520minimalist%252520style%25252C%252520perfect%252520for%252520travel%252520website%25252C%252520blue%252520and%252520white%252520color%252520scheme%25252C%252520professional%252520quality&width=400&height=300&seq=2006&orientation=landscape" alt="Middle East Travel eSIM" class="w-full h-full object-cover object-top">
+</div>
+<div class="p-4">
+<h3 class="font-semibold">Middle East Travel eSIM</h3>
+<p class="text-gray-500 text-sm mb-2">Valid in 10+ Middle Eastern countries</p>
+<div class="flex flex-wrap gap-3 mb-3">
+<div class="flex items-center text-gray-600 text-xs">
+<i class="ri-wifi-line mr-1 text-primary"></i>
+<span>4GB Data</span>
+</div>
+<div class="flex items-center text-gray-600 text-xs">
+<i class="ri-time-line mr-1 text-primary"></i>
+<span>10 Days</span>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<span class="text-primary font-bold">$18.99</span>
+<span class="text-gray-500 text-xs line-through ml-1">$23.99</span>
+</div>
+<button id="addToCartBtn2" class="px-3 py-1.5 bg-gray-100 text-gray-700 rounded-button whitespace-nowrap hover:bg-gray-200 transition text-sm">
+Add to Cart
+</button>
+</div>
+</div>
+</div>
+<!-- Recommendation 3 -->
+<div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition">
+<div class="h-40 overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=South%252520America%252520travel%252520map%252520with%252520iconic%252520landmarks%252520like%252520Christ%252520the%252520Redeemer%252520and%252520Machu%252520Picchu%25252C%252520digital%252520illustration%252520with%252520clean%252520lines%252520and%252520minimalist%252520style%25252C%252520perfect%252520for%252520travel%252520website%25252C%252520blue%252520and%252520white%252520color%252520scheme%25252C%252520professional%252520quality&width=400&height=300&seq=2007&orientation=landscape" alt="South America Travel eSIM" class="w-full h-full object-cover object-top">
+</div>
+<div class="p-4">
+<h3 class="font-semibold">South America Travel eSIM</h3>
+<p class="text-gray-500 text-sm mb-2">Valid in 8+ South American countries</p>
+<div class="flex flex-wrap gap-3 mb-3">
+<div class="flex items-center text-gray-600 text-xs">
+<i class="ri-wifi-line mr-1 text-primary"></i>
+<span>5GB Data</span>
+</div>
+<div class="flex items-center text-gray-600 text-xs">
+<i class="ri-time-line mr-1 text-primary"></i>
+<span>14 Days</span>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<span class="text-primary font-bold">$20.99</span>
+<span class="text-gray-500 text-xs line-through ml-1">$25.99</span>
+</div>
+<button id="addToCartBtn2" class="px-3 py-1.5 bg-gray-100 text-gray-700 rounded-button whitespace-nowrap hover:bg-gray-200 transition text-sm">
+Add to Cart
+</button>
+</div>
+</div>
+</div>
+<!-- Recommendation 4 -->
+<div class="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition">
+<div class="h-40 overflow-hidden">
+<img src="https://readdy.ai/api/search-image?query=Africa%252520travel%252520map%252520with%252520iconic%252520landmarks%252520and%252520safari%252520animals%25252C%252520digital%252520illustration%252520with%252520clean%252520lines%252520and%252520minimalist%252520style%25252C%252520perfect%252520for%252520travel%252520website%25252C%252520blue%252520and%252520white%252520color%252520scheme%25252C%252520professional%252520quality&width=400&height=300&seq=2008&orientation=landscape" alt="Africa Travel eSIM" class="w-full h-full object-cover object-top">
+</div>
+<div class="p-4">
+<h3 class="font-semibold">Africa Travel eSIM</h3>
+<p class="text-gray-500 text-sm mb-2">Valid in 12+ African countries</p>
+<div class="flex flex-wrap gap-3 mb-3">
+<div class="flex items-center text-gray-600 text-xs">
+<i class="ri-wifi-line mr-1 text-primary"></i>
+<span>3GB Data</span>
+</div>
+<div class="flex items-center text-gray-600 text-xs">
+<i class="ri-time-line mr-1 text-primary"></i>
+<span>10 Days</span>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<div>
+<span class="text-primary font-bold">$17.99</span>
+<span class="text-gray-500 text-xs line-through ml-1">$22.99</span>
+</div>
+<button id="addToCartBtn2" class="px-3 py-1.5 bg-gray-100 text-gray-700 rounded-button whitespace-nowrap hover:bg-gray-200 transition text-sm">
+Add to Cart
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Remove Item Confirmation Modal -->
+<div id="removeItemModal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+<div class="absolute inset-0 bg-black bg-opacity-50"></div>
+<div class="relative bg-white rounded-lg shadow-xl max-w-md w-full mx-4 p-6">
+<div class="text-center">
+<div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+<i class="ri-delete-bin-line text-red-600 text-3xl"></i>
+</div>
+<h3 class="text-xl font-bold mb-2">Remove Item?</h3>
+<p class="text-gray-600 mb-6">Are you sure you want to remove this item from your cart?</p>
+<div class="flex space-x-3">
+<button id="cancelRemoveBtn" class="flex-1 bg-gray-100 text-gray-700 py-2.5 font-medium rounded-button whitespace-nowrap hover:bg-gray-200 transition">
+Cancel
+</button>
+<button id="confirmRemoveBtn" class="flex-1 bg-red-500 text-white py-2.5 font-medium rounded-button whitespace-nowrap hover:bg-red-600 transition">
+Remove
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Clear Cart Confirmation Modal -->
+<div id="clearCartModal" class="fixed inset-0 flex items-center justify-center z-50 hidden">
+<div class="absolute inset-0 bg-black bg-opacity-50"></div>
+<div class="relative bg-white rounded-lg shadow-xl max-w-md w-full mx-4 p-6">
+<div class="text-center">
+<div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+<i class="ri-delete-bin-line text-red-600 text-3xl"></i>
+</div>
+<h3 class="text-xl font-bold mb-2">Clear Cart?</h3>
+<p class="text-gray-600 mb-6">Are you sure you want to remove all items from your cart?</p>
+<div class="flex space-x-3">
+<button id="cancelClearBtn" class="flex-1 bg-gray-100 text-gray-700 py-2.5 font-medium rounded-button whitespace-nowrap hover:bg-gray-200 transition">
+Cancel
+</button>
+<button id="confirmClearBtn" class="flex-1 bg-red-500 text-white py-2.5 font-medium rounded-button whitespace-nowrap hover:bg-red-600 transition">
+Clear Cart
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer -->
+<footer class="bg-gray-900 text-white pt-16 pb-8">
+<div class="container mx-auto px-4">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+<!-- Company Info -->
+<div>
+<a href="#" class="mb-6 inline-block">
+<img src="https://static.readdy.ai/image/70685381c99ca4e49dd877c3c9c9275a/8c0e71f0e9551716a2d424fb272e3c0f.jpeg" alt="Clarity eSIM" class="h-16 brightness-0 invert opacity-90">
+</a>
+<p class="text-gray-400 mb-6">Providing reliable global connectivity solutions for travelers since 2020. Stay connected anywhere in the world with our digital eSIM technology.</p>
+<div class="flex space-x-4">
+<a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition">
+<i class="ri-facebook-fill text-white"></i>
+</a>
+<a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition">
+<i class="ri-twitter-x-fill text-white"></i>
+</a>
+<a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition">
+<i class="ri-instagram-line text-white"></i>
+</a>
+<a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary transition">
+<i class="ri-linkedin-fill text-white"></i>
+</a>
+</div>
+</div>
+<!-- Quick Links -->
+<div>
+<h3 class="text-lg font-semibold mb-6">Quick Links</h3>
+<ul class="space-y-3">
+<li><a href="#" class="text-gray-400 hover:text-white transition">Home</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition">eSIM Plans</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition">Coverage Map</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition">How It Works</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition">Compatible Devices</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition">About Us</a></li>
+</ul>
+</div>
+<!-- Support -->
+<div>
+<h3 class="text-lg font-semibold mb-6">Support</h3>
+<ul class="space-y-3">
+<li><a href="#" class="text-gray-400 hover:text-white transition">Help Center</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition">FAQs</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition">Contact Us</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
+<li><a href="#" class="text-gray-400 hover:text-white transition">Refund Policy</a></li>
+</ul>
+</div>
+<!-- Contact -->
+<div>
+<h3 class="text-lg font-semibold mb-6">Contact Us</h3>
+<ul class="space-y-3">
+<li class="flex items-start">
+<i class="ri-map-pin-line mr-3 mt-1 text-gray-400"></i>
+<span class="text-gray-400">123 Connectivity Street, Digital City, 10001</span>
+</li>
+<li class="flex items-center">
+<i class="ri-mail-line mr-3 text-gray-400"></i>
+<a href="mailto:support@travelesim.com" class="text-gray-400 hover:text-white transition">support@travelesim.com</a>
+</li>
+<li class="flex items-center">
+<i class="ri-phone-line mr-3 text-gray-400"></i>
+<a href="tel:+18001234567" class="text-gray-400 hover:text-white transition">+1 800 123 4567</a>
+</li>
+</ul>
+<h3 class="text-lg font-semibold mt-8 mb-4">We Accept</h3>
+<div class="flex flex-wrap gap-3">
+<div class="w-10 h-6 bg-white rounded flex items-center justify-center">
+<i class="ri-visa-fill text-blue-700 text-lg"></i>
+</div>
+<div class="w-10 h-6 bg-white rounded flex items-center justify-center">
+<i class="ri-mastercard-fill text-red-500 text-lg"></i>
+</div>
+<div class="w-10 h-6 bg-white rounded flex items-center justify-center">
+<i class="ri-paypal-fill text-blue-600 text-lg"></i>
+</div>
+<div class="w-10 h-6 bg-white rounded flex items-center justify-center">
+<i class="ri-apple-fill text-gray-800 text-lg"></i>
+</div>
+<div class="w-10 h-6 bg-white rounded flex items-center justify-center">
+<i class="ri-google-fill text-gray-800 text-lg"></i>
+</div>
+</div>
+</div>
+</div>
+<div class="border-t border-gray-800 pt-8">
+<div class="flex flex-col md:flex-row justify-between items-center">
+<p class="text-gray-500 text-sm mb-4 md:mb-0">© 2025 Clarity: Travel e-SIM. All rights reserved.</p>
+<div class="flex space-x-6">
+<a href="#" class="text-gray-500 hover:text-white text-sm transition">Privacy Policy</a>
+<a href="#" class="text-gray-500 hover:text-white text-sm transition">Terms of Service</a>
+<a href="#" class="text-gray-500 hover:text-white text-sm transition">Cookie Policy</a>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+const addToCartButtons = document.querySelectorAll('[id^="addToCartBtn"]');
+const products = [
+{ name: 'Australia & NZ Travel eSIM', price: '$21.99', image: 'https://readdy.ai/api/search-image?query=Australia%252520and%252520New%252520Zealand%252520travel%252520map%252520with%252520iconic%252520landmarks%252520like%252520Sydney%252520Opera%252520House%252520and%252520Auckland%252520Sky%252520Tower%25252C%252520digital%252520illustration%252520with%252520clean%252520lines%252520and%252520minimalist%252520style%25252C%252520perfect%252520for%252520travel%252520website%25252C%252520blue%252520and%252520white%252520color%252520scheme%25252C%252520professional%252520quality&width=400&height=300&seq=2005&orientation=landscape' },
+{ name: 'Middle East Travel eSIM', price: '$18.99', image: 'https://readdy.ai/api/search-image?query=Middle%252520East%252520travel%252520map%252520with%252520iconic%252520landmarks%252520like%252520Burj%252520Khalifa%252520and%252520Petra%25252C%252520digital%252520illustration%252520with%252520clean%252520lines%252520and%252520minimalist%252520style%25252C%252520perfect%252520for%252520travel%252520website%25252C%252520blue%252520and%252520white%252520color%252520scheme%25252C%252520professional%252520quality&width=400&height=300&seq=2006&orientation=landscape' },
+{ name: 'South America Travel eSIM', price: '$20.99', image: 'https://readdy.ai/api/search-image?query=South%252520America%252520travel%252520map%252520with%252520iconic%252520landmarks%252520like%252520Christ%252520the%252520Redeemer%252520and%252520Machu%252520Picchu%25252C%252520digital%252520illustration%252520with%252520clean%252520lines%252520and%252520minimalist%252520style%25252C%252520perfect%252520for%252520travel%252520website%25252C%252520blue%252520and%252520white%252520color%252520scheme%25252C%252520professional%252520quality&width=400&height=300&seq=2007&orientation=landscape' },
+{ name: 'Africa Travel eSIM', price: '$17.99', image: 'https://readdy.ai/api/search-image?query=Africa%252520travel%252520map%252520with%252520iconic%252520landmarks%252520and%252520safari%252520animals%25252C%252520digital%252520illustration%252520with%252520clean%252520lines%252520and%252520minimalist%252520style%25252C%252520perfect%252520for%252520travel%252520website%25252C%252520blue%252520and%252520white%252520color%252520scheme%25252C%252520professional%252520quality&width=400&height=300&seq=2008&orientation=landscape' }
+];
+addToCartButtons.forEach((button, index) => {
+if (button) {
+button.addEventListener('click', () => {
+handleAddToCart(button, products[index].name, products[index].price, products[index].image);
+});
+}
+});
+// Cart Dropdown Functionality
+const cartIcon = document.getElementById('cartIcon');
+const cartDropdown = document.getElementById('cartDropdown');
+let isCartOpen = false;
+if (cartIcon && cartDropdown) {
+cartIcon.addEventListener('click', function(e) {
+e.stopPropagation();
+isCartOpen = !isCartOpen;
+if (isCartOpen) {
+cartDropdown.classList.remove('hidden');
+} else {
+cartDropdown.classList.add('hidden');
+}
+});
+cartDropdown.addEventListener('click', function(e) {
+e.stopPropagation();
+});
+document.addEventListener('click', function() {
+if (isCartOpen) {
+cartDropdown.classList.add('hidden');
+isCartOpen = false;
+}
+});
+}
+// Quantity buttons functionality
+const quantityBtns = document.querySelectorAll('.quantity-btn');
+quantityBtns.forEach(btn => {
+btn.addEventListener('click', function() {
+const action = this.dataset.action;
+const input = this.parentElement.querySelector('.quantity-input');
+let value = parseInt(input.value);
+if (action === 'increase') {
+if (value < parseInt(input.max)) {
+input.value = value + 1;
+updateCartTotals();
+}
+} else if (action === 'decrease') {
+if (value > parseInt(input.min)) {
+input.value = value - 1;
+updateCartTotals();
+}
+}
+});
+});
+// Quantity input change
+const quantityInputs = document.querySelectorAll('.quantity-input');
+quantityInputs.forEach(input => {
+input.addEventListener('change', function() {
+let value = parseInt(this.value);
+const min = parseInt(this.min);
+const max = parseInt(this.max);
+if (value < min) {
+this.value = min;
+} else if (value > max) {
+this.value = max;
+}
+updateCartTotals();
+});
+});
+// Remove item functionality
+const removeButtons = document.querySelectorAll('button:not(.quantity-btn):not(#cancelRemoveBtn):not(#confirmRemoveBtn):not(#clearCartBtn):not(#cancelClearBtn):not(#confirmClearBtn)');
+const removeItemModal = document.getElementById('removeItemModal');
+const cancelRemoveBtn = document.getElementById('cancelRemoveBtn');
+const confirmRemoveBtn = document.getElementById('confirmRemoveBtn');
+let currentItemToRemove = null;
+removeButtons.forEach(button => {
+if (button.textContent.trim() === 'Remove') {
+button.addEventListener('click', function() {
+currentItemToRemove = this.closest('.py-6');
+removeItemModal.classList.remove('hidden');
+});
+}
+});
+cancelRemoveBtn.addEventListener('click', function() {
+removeItemModal.classList.add('hidden');
+currentItemToRemove = null;
+});
+confirmRemoveBtn.addEventListener('click', function() {
+if (currentItemToRemove) {
+currentItemToRemove.remove();
+updateCartTotals();
+}
+removeItemModal.classList.add('hidden');
+currentItemToRemove = null;
+});
+// Clear cart functionality
+const clearCartBtn = document.getElementById('clearCartBtn');
+const clearCartModal = document.getElementById('clearCartModal');
+const cancelClearBtn = document.getElementById('cancelClearBtn');
+const confirmClearBtn = document.getElementById('confirmClearBtn');
+clearCartBtn.addEventListener('click', function() {
+clearCartModal.classList.remove('hidden');
+});
+cancelClearBtn.addEventListener('click', function() {
+clearCartModal.classList.add('hidden');
+});
+confirmClearBtn.addEventListener('click', function() {
+const cartItems = document.querySelectorAll('.divide-y > .py-6');
+cartItems.forEach(item => {
+item.remove();
+});
+updateCartTotals();
+clearCartModal.classList.add('hidden');
+});
+// Close modals when clicking outside
+window.addEventListener('click', function(e) {
+if (e.target === removeItemModal || e.target === clearCartModal) {
+removeItemModal.classList.add('hidden');
+clearCartModal.classList.add('hidden');
+currentItemToRemove = null;
+}
+});
+// Update cart totals
+function showToast() {
+const toast = document.getElementById('toastNotification');
+toast.classList.remove('translate-x-full', 'opacity-0');
+setTimeout(() => {
+toast.classList.add('translate-x-full', 'opacity-0');
+}, 3000);
+}
+function handleAddToCart(button, productName, price, imageSrc) {
+const originalText = button.innerHTML;
+button.innerHTML = '<i class="ri-checkbox-line mr-1"></i>Added to Cart';
+button.classList.remove('bg-gray-100', 'text-gray-700', 'hover:bg-gray-200');
+button.classList.add('bg-green-500', 'text-white', 'hover:bg-green-600');
+setTimeout(() => {
+button.innerHTML = originalText;
+button.classList.remove('bg-green-500', 'text-white', 'hover:bg-green-600');
+button.classList.add('bg-gray-100', 'text-gray-700', 'hover:bg-gray-200');
+}, 2000);
+const cartCountBadge = document.querySelector('#cartIcon span');
+const currentCount = parseInt(cartCountBadge.textContent);
+cartCountBadge.textContent = currentCount + 1;
+const cartDropdown = document.getElementById('cartDropdown');
+const cartItemsContainer = cartDropdown.querySelector('.py-4');
+const newItem = document.createElement('div');
+newItem.className = 'flex items-center gap-3 mb-3';
+newItem.innerHTML = `
+<div class="w-16 h-16 flex-shrink-0 rounded-lg overflow-hidden">
+<img src="${imageSrc}" alt="${productName}" class="w-full h-full object-cover object-top">
+</div>
+<div class="flex-grow">
+<h4 class="font-medium text-sm">${productName}</h4>
+<div class="flex items-center justify-between mt-1">
+<span class="text-primary font-medium">${price}</span>
+<div class="flex items-center gap-2">
+<button class="w-6 h-6 flex items-center justify-center text-gray-500 hover:text-primary bg-gray-50 rounded">-</button>
+<span class="text-sm">1</span>
+<button class="w-6 h-6 flex items-center justify-center text-gray-500 hover:text-primary bg-gray-50 rounded">+</button>
+</div>
+</div>
+</div>
+`;
+cartItemsContainer.insertBefore(newItem, cartItemsContainer.firstChild);
+showToast();
+updateCartTotals();
+}
+function updateCartTotals() {
+// This is a simplified calculation - in a real app, you'd calculate based on actual prices
+const subtotalElement = document.querySelector('.space-y-3 .flex:first-child span:last-child');
+const totalElement = document.querySelector('.space-y-3 .flex:last-child span:last-child');
+const cartItemCount = document.querySelectorAll('.divide-y > .py-6').length;
+const subtotalText = document.querySelector('.space-y-3 .flex:first-child span:first-child');
+if (subtotalElement && totalElement && subtotalText) {
+subtotalText.textContent = `Subtotal (${cartItemCount} items)`;
+// Simple calculation based on the number of items
+const subtotal = cartItemCount > 0 ? 59.97 : 0;
+const discount = cartItemCount > 0 ? 15.00 : 0;
+const tax = cartItemCount > 0 ? 4.50 : 0;
+const total = subtotal - discount + tax;
+subtotalElement.textContent = `$${subtotal.toFixed(2)}`;
+totalElement.textContent = `$${total.toFixed(2)}`;
+// Update cart icon count
+const cartCountBadge = document.querySelector('#cartIcon span');
+if (cartCountBadge) {
+cartCountBadge.textContent = cartItemCount;
+}
+}
+}
+});
+</script>
+</body>
+</html>

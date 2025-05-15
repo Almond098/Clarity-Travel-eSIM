@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign In - Clarity eSIM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com/3.4.16"></script>
+<script>
+tailwind.config = {
+theme: {
+extend: {
+colors: {
+primary: '#0066FF',
+secondary: '#FF6B00'
+},
+borderRadius: {
+'none': '0px',
+'sm': '4px',
+DEFAULT: '8px',
+'md': '12px',
+'lg': '16px',
+'xl': '20px',
+'2xl': '24px',
+'3xl': '32px',
+'full': '9999px',
+'button': '8px'
+},
+fontFamily: {
+'sans': ['Inter', 'sans-serif'],
+}
+}
+}
+}
+</script>
+<style>
+:where([class^="ri-"])::before { content: "\f3c2"; }
+body {
+font-family: 'Inter', sans-serif;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+-webkit-appearance: none;
+margin: 0;
+}
+.password-toggle {
+position: absolute;
+right: 12px;
+top: 50%;
+transform: translateY(-50%);
+cursor: pointer;
+color: #9ca3af;
+}
+.password-toggle:hover {
+color: #6b7280;
+}
+.custom-checkbox {
+position: relative;
+display: inline-block;
+width: 20px;
+height: 20px;
+border: 2px solid #d1d5db;
+border-radius: 4px;
+transition: all 0.2s;
+}
+.custom-checkbox.checked {
+background-color: #0066FF;
+border-color: #0066FF;
+}
+.custom-checkbox.checked::after {
+content: '';
+position: absolute;
+left: 6px;
+top: 2px;
+width: 5px;
+height: 10px;
+border: solid white;
+border-width: 0 2px 2px 0;
+transform: rotate(45deg);
+}
+</style>
+</head>
+<body class="bg-gray-50 text-gray-800 min-h-screen flex flex-col">
+<!-- Header -->
+<header class="bg-white shadow-sm py-4">
+<div class="container mx-auto px-4 flex items-center justify-between">
+<a href="https://readdy.ai/home/cb427912-1443-4d48-ab20-fc0dde936c49/24a98dbc-1119-4e00-a8a9-2f929b42c040" data-readdy="true">
+<img src="https://static.readdy.ai/image/70685381c99ca4e49dd877c3c9c9275a/8c0e71f0e9551716a2d424fb272e3c0f.jpeg" alt="Clarity eSIM" class="h-12 mix-blend-multiply">
+</a>
+<a href="https://readdy.ai/home/cb427912-1443-4d48-ab20-fc0dde936c49/24a98dbc-1119-4e00-a8a9-2f929b42c040" data-readdy="true" class="text-gray-600 hover:text-primary transition flex items-center">
+<i class="ri-arrow-left-line mr-1"></i>
+<span>Back to Home</span>
+</a>
+</div>
+</header>
+
+<!-- Main Content -->
+<main class="flex-grow flex items-center justify-center py-12 px-4">
+<div class="max-w-md w-full bg-white rounded-lg shadow-sm p-8">
+<div class="text-center mb-8">
+<h1 class="text-2xl font-bold mb-2">Sign In to Your Account</h1>
+<p class="text-gray-600">Access your eSIM dashboard and manage your connectivity</p>
+</div>
+
+<form>
+<!-- Email/Username Field -->
+<div class="mb-6">
+<label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email or Username</label>
+<div class="relative">
+<div class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+<i class="ri-mail-line"></i>
+</div>
+<input type="text" id="email" name="email" class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none text-sm" placeholder="Enter your email or username">
+</div>
+</div>
+
+<!-- Password Field -->
+<div class="mb-6">
+<div class="flex justify-between mb-1">
+<label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+</div>
+<div class="relative">
+<div class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+<i class="ri-lock-line"></i>
+</div>
+<input type="password" id="password" name="password" class="w-full pl-10 pr-10 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none text-sm" placeholder="Enter your password">
+<div class="password-toggle" id="passwordToggle">
+<i class="ri-eye-line"></i>
+</div>
+</div>
+</div>
+
+<!-- Remember Me & Forgot Password -->
+<div class="flex justify-between items-center mb-6">
+<div class="flex items-center">
+<input type="checkbox" id="remember" name="remember" class="opacity-0 absolute">
+<div class="custom-checkbox mr-2" id="rememberCheckbox"></div>
+<label for="remember" class="text-sm text-gray-600 cursor-pointer">Remember me</label>
+</div>
+<a href="#" class="text-sm text-primary hover:underline">Forgot password?</a>
+</div>
+
+<!-- Sign In Button -->
+<button type="submit" class="w-full bg-primary text-white py-3 font-semibold rounded-button whitespace-nowrap hover:bg-primary/90 transition mb-6">
+Sign In
+</button>
+</form>
+
+<!-- Social Sign-in -->
+<div class="relative mb-6">
+<div class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-gray-200"></div>
+</div>
+<div class="relative flex justify-center text-sm">
+<span class="px-4 bg-white text-gray-500">Or continue with</span>
+</div>
+</div>
+
+<div class="grid grid-cols-3 gap-3 mb-8">
+<button class="flex items-center justify-center py-2.5 border border-gray-300 rounded hover:bg-gray-50 transition">
+<i class="ri-google-fill text-lg mr-2"></i>
+<span class="text-sm font-medium">Google</span>
+</button>
+<button class="flex items-center justify-center py-2.5 border border-gray-300 rounded hover:bg-gray-50 transition">
+<i class="ri-apple-fill text-lg mr-2"></i>
+<span class="text-sm font-medium">Apple</span>
+</button>
+<button class="flex items-center justify-center py-2.5 border border-gray-300 rounded hover:bg-gray-50 transition">
+<i class="ri-facebook-fill text-lg mr-2"></i>
+<span class="text-sm font-medium">Facebook</span>
+</button>
+</div>
+
+<!-- Create Account Link -->
+<div class="text-center">
+<p class="text-gray-600">
+Don't have an account? 
+<a href="https://readdy.ai/home/cb427912-1443-4d48-ab20-fc0dde936c49/37525892-6f6d-4ca5-b9b0-be204ec65424" data-readdy="true" class="text-primary font-medium hover:underline">Create Account</a>
+</p>
+</div>
+</div>
+</main>
+
+<!-- Footer -->
+<footer class="bg-white py-6 border-t border-gray-200">
+<div class="container mx-auto px-4">
+<div class="flex flex-col md:flex-row justify-between items-center">
+<p class="text-gray-500 text-sm mb-4 md:mb-0">© 2025 Clarity: Travel e-SIM. All rights reserved.</p>
+<div class="flex space-x-6">
+<a href="#" class="text-gray-500 hover:text-primary text-sm transition">Privacy Policy</a>
+<a href="#" class="text-gray-500 hover:text-primary text-sm transition">Terms of Service</a>
+<a href="#" class="text-gray-500 hover:text-primary text-sm transition">Help Center</a>
+</div>
+</div>
+</div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+// Password visibility toggle
+const passwordToggle = document.getElementById('passwordToggle');
+const passwordInput = document.getElementById('password');
+
+passwordToggle.addEventListener('click', function() {
+const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+passwordInput.setAttribute('type', type);
+
+
+const icon = passwordToggle.querySelector('i');
+if (type === 'password') {
+    icon.classList.remove('ri-eye-off-line');
+    icon.classList.add('ri-eye-line');
+} else {
+    icon.classList.remove('ri-eye-line');
+    icon.classList.add('ri-eye-off-line');
+}
+});
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+// Custom checkbox functionality
+const checkbox = document.getElementById('remember');
+const customCheckbox = document.getElementById('rememberCheckbox');
+
+customCheckbox.addEventListener('click', function() {
+    checkbox.checked = !checkbox.checked;
+    if (checkbox.checked) {
+        customCheckbox.classList.add('checked');
+    } else {
+        customCheckbox.classList.remove('checked');
+    }
+});
+
+// Initialize checkbox state
+if (checkbox.checked) {
+    customCheckbox.classList.add('checked');
+}
+});
+</script>
+</body>
+</html>
